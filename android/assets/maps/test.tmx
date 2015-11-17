@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="15" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="JungleTileSet1" tilewidth="40" tileheight="40" spacing="1" margin="1">
+  <image source="JungleTileSet1.png" width="575" height="83"/>
+ </tileset>
+ <tileset firstgid="29" name="menubg" tilewidth="320" tileheight="240">
+  <image source="../images/menubg.gif" width="320" height="240"/>
+ </tileset>
+ <tileset firstgid="30" name="generic-platformer-tiles" tilewidth="32" tileheight="32">
+  <image source="generic-platformer-tiles.png" width="384" height="256"/>
+ </tileset>
+ <tileset firstgid="126" name="castle_tileset_part1_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part1_0.png" width="512" height="1344"/>
+ </tileset>
+ <layer name="bg" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==
+  </data>
+ </layer>
+ <layer name="ground" width="40" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwTZBjcQHCgHUAAjLqPMjDqPsrAqPsoA6PuowwMVfeJ0tUVuAGtwo8RiJmQMDOZ+gTQ+LgwsvksRLiDH2o2MibGjdj0EYORw1kAj3mCOMRhmJD/0fUBAHlGA4Y=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="40" height="15">
+  <object x="260" y="420">
+   <ellipse/>
+  </object>
+  <object x="60" y="419">
+   <ellipse/>
+  </object>
+  <object x="536" y="496">
+   <ellipse/>
+  </object>
+  <object x="901" y="460">
+   <ellipse/>
+  </object>
+  <object x="1254" y="496">
+   <ellipse/>
+  </object>
+  <object x="1459" y="458">
+   <ellipse/>
+  </object>
+ </objectgroup>
+</map>

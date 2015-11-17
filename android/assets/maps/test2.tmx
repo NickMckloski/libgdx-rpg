@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="castle_tileset_part1_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part1_0.png" width="512" height="1344"/>
+ </tileset>
+ <tileset firstgid="673" name="castle_tileset_part2_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part2_0.png" width="512" height="672"/>
+ </tileset>
+ <tileset firstgid="1009" name="castle_tileset_part3_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part3_0.png" width="512" height="384"/>
+ </tileset>
+ <layer name="bg" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Hzr6vC5mIvSFg1VVXVhwfWF2Sf
+  </data>
+ </layer>
+ <layer name="Tile Layer 6" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJylk0sOwzAIROf+N+iq6U276QJR5oONFCnBeHh8AgCf34PyXn3demz391imleSYmG4fxufiU/+Wpb8rTceeMtW4REv14Lb3rAcun+JmGsk38K/jeqvOXF5XZ8qn+uC4VMx2B1VPQM4YR1rDdI9pqT2c8rFamT/ddTV7xsbi0/2f9NI8Wz5X25TnxBxfeiftdcrkGOqZm0sy74STaSnbar4I9/bfYbEst+J6B0wblhP26S5CNlbvaU3qP0lntGHp5u6x+N6327m62uv5xKuMsVWNJ+RL/GqmzpJ6mPZmb7t9Ady9NMg=
+  </data>
+ </layer>
+ <layer name="Tile Layer 7" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztVUEOwCAI4/8P2Ht3XQwtRZjOZE0Wg1pWGkWzM3GBbzeYHqTZ052pieXIxCifWoe6jv7BYpTXhtGbZ1xWY1RPxSNPNwPyRj1v3jyKIz7TGPky7q9gRtsuKF6qd70bWR+VPF/oxU906umurdrnvX0rkX3HOu59N6/j7Co+zPKzuTIc9oZ4/Dd6qdoXmb8/zsMNSHVeVw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 8" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdVUEOwCAI4/9nH7zjzAKlhanLmphMJ7SKgJnZsBsDDAXq/q4vVm/nTMift16xecaiC48r42d534oxEzv0P4s34qm+G8ZH1S9CdHbmXlRtq4D0ZntWg8nNL2pD8x1gc9Cb70CWf+x8FZT6NX+f1BflA+pjb/Y0VC+i+2HrTlUP+56qfaiq0ePO1iNbhUvV17FXofbdE3Vr5v8jLlTicL0=
+  </data>
+ </layer>
+ <layer name="Tile Layer 9" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztVVsOwCAI8/434Lb7NYQ+ROM+NpIlJsW2Q8Qx/pgjBMbwG4E8BMFuR6T17OsNfyG+nLuj4eSxfYoHYUrbwauaqHohHqbv1KDSr/YyHy6GNKr/RuvMtesP6VX+EG+3VxB3xcF6t9vbnTnGzknlrfrL6xV/q7lOf7Ec5fn0u8H6luWxuZP3IM5OuPMK1dx9UxwdxIc8u3OpwhAH4nfDOXc1IxCWc073wIl7cPIufSEej+50jA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 10" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzNk1EOwzAIQ7n/IXrW/uyjSm3zSDZpSJEaarAJUPW263Ocdf9/ZRc4DrvLcarrianFr/QSjsTr4lQO51/jCYboUvGTPipzHI6zu1f433ElbTR20pP1u+NMuBJY2q+U0/HS/EnLild3orvD0ZOM7k/KmXBUx9S6fVSzSHv3LX2rrm7fuvkgnDvYtCvq7XZqcr3p9Cl/0nq6J5OdUT73piSO1kS0dbuh+kFmYfqWKg+p/5R/OpNPPYR7qs/V63zOJrM5yevy7MSTPv+DJU034lvzyw==
+  </data>
+ </layer>
+ <layer name="bg2" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztkd0NgCAMhGthAXUDXcjF/Hkg7ukGQnywGFFLeTHpJYZecuW+IADAYIElbj5nh+aVT/kkXdIO5VM+SZe047q7mWfPzQdPd7j5a1/14rn54OkON/+3/1u6S9qhfGX4RozPr13ovbnpp/fk8s14zgvG5xe+2s+N/1p7zFRLgm96uZ/mHcZz0Mp8v877/uZ9XILPMfhUMu1NJyeO
+  </data>
+ </layer>
+ <layer name="ground" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztk1EKADAIQmP3P/Qu4FYLhgo98DuzjBgGXRaQC12vqjszfahk0IHl/TbXOU8GqIuop4q9zcj+RHm/n/5e76uQhyPOuVV+ZHTWBtWGARE=
+  </data>
+ </layer>
+ <layer name="bg3" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2DwAj0g5kHC+gPrHJKAAZn6BqufyfXPULebUjBQbsdn71AOz8ECNIjAQwHgSwt8DKhlETLmp73TCAI5BtxhL0+h2aTG72ieIg8M5XDDlTcGCyYmDQ8kBgCuWw81
+  </data>
+ </layer>
+ <layer name="Tile Layer 12" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAw0kPFLASPTzKBgFo2AUjIJRMApGBgAA1RgA8Q==
+  </data>
+ </layer>
+ <objectgroup name="coins" width="40" height="20">
+  <object x="241" y="402"/>
+  <object x="16" y="399"/>
+  <object x="880" y="435"/>
+  <object x="1136" y="433"/>
+  <object x="1070" y="371"/>
+  <object x="592" y="338"/>
+  <object x="575" y="563"/>
+  <object x="971" y="141"/>
+  <object x="1041" y="142"/>
+  <object x="1007" y="142"/>
+  <object x="335" y="114"/>
+  <object x="591" y="208"/>
+ </objectgroup>
+ <objectgroup name="bats" width="40" height="20">
+  <object x="208" y="560"/>
+  <object x="334" y="561"/>
+ </objectgroup>
+ <objectgroup name="spikes" width="40" height="20"/>
+ <objectgroup name="hearts" width="40" height="20">
+  <object x="148" y="559"/>
+  <object x="466" y="559"/>
+  <object x="106" y="401"/>
+  <object x="879" y="180"/>
+ </objectgroup>
+ <layer name="Tile Layer 11" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAPNjDh55OilxpmooMDTPj5pOilhpnUNIse7rvAhJ+PD9DDfZQAXPZS4mdqgoEKF2IBIfdRkm+pAQi5b6DDd9R9lAFC+XKg8i0M8AExDx7MP3BOGwVUAKPxOwpGAW0BAD9lGqc=
+  </data>
+ </layer>
+</map>

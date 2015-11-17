@@ -1,0 +1,18 @@
+skin.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+buttonSquare_grey
+  rotate: false
+  xy: 2, 2
+  size: 45, 49
+  orig: 45, 49
+  offset: 0, 0
+  index: -1
+settings
+  rotate: false
+  xy: 49, 2
+  size: 117, 117
+  orig: 117, 117
+  offset: 0, 0
+  index: -1
