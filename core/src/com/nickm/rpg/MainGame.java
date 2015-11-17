@@ -41,7 +41,7 @@ public class MainGame extends ApplicationAdapter {
 	public void create() {
 		//Gdx.input.setInputProcessor(new InputManager());
 		getDeviceResolution();
-		if(getRunType() == ApplicationType.Android) {
+		if(isMobileRuntime()) {
 			V_WIDTH = 320;
 			V_HEIGHT = 240;
 		} else {
@@ -70,7 +70,7 @@ public class MainGame extends ApplicationAdapter {
 		//create hud cam
 		hudCam = new OrthographicCamera();
 		//set hudcam and stage views
-		if(getRunType() == ApplicationType.Android) {
+		if(isMobileRuntime()) {
 			hudCam.setToOrtho(false, V_WIDTH*2, V_HEIGHT*2);
 			stage.setViewport(new StretchViewport(V_WIDTH*2, V_HEIGHT*2));
 		} else {
@@ -116,8 +116,8 @@ public class MainGame extends ApplicationAdapter {
 		SaveManager.saveDataValue("fullscreen", Gdx.graphics.isFullscreen() ? true : false);
 	}
 	
-	public static ApplicationType getRunType() {
-		return Gdx.app.getType();
+	public static boolean isMobileRuntime() {
+		return Gdx.app.getType() == ApplicationType.Android || Gdx.app.getType() == ApplicationType.iOS;
 	}
 	
 	public static GameStateManager getGameStateManager() { return gameStateManager;	}

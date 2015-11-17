@@ -78,7 +78,7 @@ public class HUD {
         //add coin counter label and set it's position 
 		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
 		coins = new Label("Coins: "+Integer.toString(player.coins), labelStyle);
-		if(MainGame.getRunType() == ApplicationType.Android) {
+		if(MainGame.isMobileRuntime()) {
 			settingsTable.setBounds(640, 460, 32, 32);
 			coins.setBounds(20, 420, 100, 50);
 		} else {
@@ -130,7 +130,7 @@ public class HUD {
 	}
 	
 	public void render(SpriteBatch sb, Stage stage) {
-		if(MainGame.getRunType() == ApplicationType.Android) {
+		if(MainGame.isMobileRuntime()) {
 			if(!stage.getActors().contains(settingsWindow, true)) {
 				stage.addActor(attackTable);
 				stage.addActor(jumpTable);

@@ -121,7 +121,7 @@ public class Play extends GameState {
             		openSettings();
             }
         });
-		if(MainGame.getRunType() == ApplicationType.Android)
+		if(MainGame.isMobileRuntime())
 			handleListeners();
 	}
 	
@@ -138,7 +138,7 @@ public class Play extends GameState {
         hud.settingsWindow = new Window("Settings", skin, "dialog");
 
         //change size based on run type
-		if(MainGame.getRunType() == ApplicationType.Android) {
+		if(MainGame.isMobileRuntime()) {
 			hud.settingsWindow.setBounds(75, 75, (MainGame.V_WIDTH*2)-150, (MainGame.V_HEIGHT*2)-150);
 		} else {
 			hud.settingsWindow.setBounds(75, 75, 1280-150, 720-150);
@@ -349,7 +349,7 @@ public class Play extends GameState {
 		player.getBody().setLinearVelocity(vel);
 		
 		//android
-		if(MainGame.getRunType() == ApplicationType.Android) {
+		if(MainGame.isMobileRuntime()) {
 			if (hud.touchpad.isTouched() && !player.isBusy()) {
 				if(hud.touchpad.getKnobPercentX() < 0) { //left
     				player.startAnimation(contactManager.onGround() && !player.isBusy() ? 3 : 5);
@@ -392,10 +392,8 @@ public class Play extends GameState {
 				contactManager.hitByMob = false;
 			}
 			
-		}
-		
+		} else {
 		//desktop
-		if(MainGame.getRunType() == ApplicationType.Desktop) {
 			if(Input.isPressed(Input.ESCAPE)) {
             	if(!stage.getActors().contains(hud.settingsWindow, true))
             		openSettings();
