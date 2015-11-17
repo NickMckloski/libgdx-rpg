@@ -12,8 +12,8 @@ public class AssetsManager {
 	//ui assets
 	public static String blueUi = "skins/colorskins/ui-blue.atlas";
 	public static String redUi = "skins/colorskins/ui-red.atlas";
-	public static String heartEmpty = "skins/colorskins/ui-red.atlas";
-	public static String heartFull = "skins/colorskins/ui-red.atlas";
+	public static String heartFull = "images/heartfull.png";
+	public static String heartEmpty = "images/heartempty.png";
 	
 	//entity assets
 	public static String playerSheet = "images/playersheet.png";//playersheet1 currently not in use
@@ -33,8 +33,8 @@ public class AssetsManager {
 		//ui assets
 		manager.load(blueUi, TextureAtlas.class);
 		manager.load(redUi, TextureAtlas.class);
-		manager.load(heartEmpty, Texture.class);
 		manager.load(heartFull, Texture.class);
+		manager.load(heartEmpty, Texture.class);
 		
 		//entity assets
 		manager.load(playerSheet, Texture.class);

@@ -26,6 +26,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.nickm.rpg.MainGame;
 import com.nickm.rpg.entity.impl.Player;
 import com.nickm.rpg.input.Input;
@@ -57,11 +59,18 @@ public class HUD {
 		
 		this.player = player;
 		
+		//grab the ui textures
 		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
 		TextureAtlas redUi = MainGame.assets.get(AssetsManager.redUi, TextureAtlas.class);
 
-		//font
-		BitmapFont font = new BitmapFont(Gdx.files.internal("skins/custom/Arimo.fnt"), Gdx.files.internal("skins/custom/Arimo.png"), false);
+	    //generate the font
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("skins/custom/fonts/Arimo/Arimo-Regular.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 20;
+        parameter.shadowColor = Color.BLACK;
+        parameter.shadowOffsetY = 1;
+        BitmapFont font = generator.generateFont(parameter);
+        generator.dispose();
 		
 		//load the heart/health sprites
 		heartFull = MainGame.assets.get(AssetsManager.heartFull, Texture.class);
