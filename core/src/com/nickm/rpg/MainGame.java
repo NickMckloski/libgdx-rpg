@@ -12,7 +12,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nickm.rpg.components.BoundedCamera;
 import com.nickm.rpg.input.Input;
-import com.nickm.rpg.manager.Assets;
+import com.nickm.rpg.manager.AssetsManager;
 import com.nickm.rpg.manager.GameStateManager;
 import com.nickm.rpg.manager.SaveManager;
 
@@ -32,7 +32,7 @@ public class MainGame extends ApplicationAdapter {
 	private OrthographicCamera hudCam;
 	
 	private static GameStateManager gameStateManager;
-	public static Assets assets;
+	public static AssetsManager assets;
 	public SaveManager saveManager;
 	
 	public static boolean fullscreen;
@@ -50,7 +50,7 @@ public class MainGame extends ApplicationAdapter {
 		}
 		
 		//load our assets through Assets class
-		assets = new Assets();
+		assets = new AssetsManager();
 		
 		//initiate new spritebatch
 		sb = new SpriteBatch();

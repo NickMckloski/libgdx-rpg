@@ -25,7 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.nickm.rpg.MainGame;
 import com.nickm.rpg.input.Input;
-import com.nickm.rpg.manager.Assets;
+import com.nickm.rpg.manager.AssetsManager;
 import com.nickm.rpg.manager.GameStateManager;
 import com.nickm.rpg.state.GameState;
 
@@ -68,7 +68,7 @@ public class StartMenu extends GameState {
 	    labelStyle = new LabelStyle(titleFont, Color.WHITE);
 		title = new Label("RPG Game", labelStyle);
 		
-		TextureAtlas blueUi = MainGame.assets.get(Assets.blueUi, TextureAtlas.class);
+		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
 		TextureRegionDrawable playUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
 		TextureRegionDrawable playDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
 		TextButton playButton = new TextButton("Play", new TextButtonStyle(playUp, playDown, playUp, buttonFont));

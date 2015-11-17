@@ -5,13 +5,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 
-public class Assets {
+public class AssetsManager {
 
 	private AssetManager manager;
 	
 	//ui assets
 	public static String blueUi = "skins/colorskins/ui-blue.atlas";
 	public static String redUi = "skins/colorskins/ui-red.atlas";
+	public static String heartEmpty = "skins/colorskins/ui-red.atlas";
+	public static String heartFull = "skins/colorskins/ui-red.atlas";
 	
 	//entity assets
 	public static String playerSheet = "images/playersheet.png";//playersheet1 currently not in use
@@ -23,7 +25,7 @@ public class Assets {
 	/**
 	 * Construct our assets class
 	 */
-	public Assets() {
+	public AssetsManager() {
 		//initiate asset manager
 		this.manager = new AssetManager();
 		
@@ -31,6 +33,8 @@ public class Assets {
 		//ui assets
 		manager.load(blueUi, TextureAtlas.class);
 		manager.load(redUi, TextureAtlas.class);
+		manager.load(heartEmpty, Texture.class);
+		manager.load(heartFull, Texture.class);
 		
 		//entity assets
 		manager.load(playerSheet, Texture.class);

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.nickm.rpg.MainGame;
 import com.nickm.rpg.entity.Entity;
-import com.nickm.rpg.manager.Assets;
+import com.nickm.rpg.manager.AssetsManager;
 
 public class Player extends Entity {
 	
@@ -18,7 +18,7 @@ public class Player extends Entity {
 	private int face = 0; 
 	//0 = forward, 1 = backward
 	
-	Texture tex = MainGame.assets.get(Assets.playerSheet2, Texture.class);
+	Texture tex = MainGame.assets.get(AssetsManager.playerSheet2, Texture.class);
 	
 	public int coins = 0;
 	

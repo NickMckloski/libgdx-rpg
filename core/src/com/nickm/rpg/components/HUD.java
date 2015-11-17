@@ -29,41 +29,27 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.nickm.rpg.MainGame;
 import com.nickm.rpg.entity.impl.Player;
 import com.nickm.rpg.input.Input;
-import com.nickm.rpg.manager.Assets;
+import com.nickm.rpg.manager.AssetsManager;
 import com.nickm.rpg.state.impl.Play;
 
 public class HUD {
 
 	private Player player;
 
-    //atlas
-    //TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("skins/colorskins/ui-blue.atlas"));
-    
-    TextureRegionDrawable settings;
-    public Button settingsButton;
-    Table settingsTable;
+    Label coins;
 	public int[][] health;
 	private Texture heartFull;
 	private Texture heartEmpty;
-	private TextureRegion[] numbers;
-
-    TextureRegionDrawable jumpUp;
-    TextureRegionDrawable jumpDown;
-    public TextButton jumpButton;
-    TextureRegionDrawable attackUp;
-    TextureRegionDrawable attackDown;
-    public TextButton attackButton;
-    BitmapFont font;
-    Table jumpTable;
-    Table attackTable;
     
-    Label coins;
+    public Button settingsButton;
+    private Table settingsTable;
+
+    public TextButton jumpButton;
+    public TextButton attackButton;
+    private Table jumpTable;
+    private Table attackTable;
     
     public Touchpad touchpad;
-	private TouchpadStyle touchpadStyle;
-	private Skin touchpadSkin;
-	private Drawable touchBackground;
-	private Drawable touchKnob;
 
 	public Window settingsWindow;
 	
@@ -71,18 +57,18 @@ public class HUD {
 		
 		this.player = player;
 		
-		TextureAtlas blueUi = MainGame.assets.get(Assets.blueUi, TextureAtlas.class);
-		TextureAtlas redUi = MainGame.assets.get(Assets.redUi, TextureAtlas.class);
+		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
+		TextureAtlas redUi = MainGame.assets.get(AssetsManager.redUi, TextureAtlas.class);
 
 		//font
-		font = new BitmapFont(Gdx.files.internal("skins/custom/Arimo.fnt"), Gdx.files.internal("skins/custom/Arimo.png"), false);
+		BitmapFont font = new BitmapFont(Gdx.files.internal("skins/custom/Arimo.fnt"), Gdx.files.internal("skins/custom/Arimo.png"), false);
 		
 		//load the heart/health sprites
-		heartFull = new Texture(Gdx.files.internal("images/heartfull.png"));
-		heartEmpty = new Texture(Gdx.files.internal("images/heartempty.png"));
+		heartFull = MainGame.assets.get(AssetsManager.heartFull, Texture.class);
+		heartEmpty = MainGame.assets.get(AssetsManager.heartEmpty, Texture.class);
 		
 		//create textures for settings button
-		settings = new TextureRegionDrawable(blueUi.findRegion("icon_tools"));
+		TextureRegionDrawable settings = new TextureRegionDrawable(blueUi.findRegion("icon_tools"));
 		settingsButton = new Button(settings);
 		settingsButton.setFillParent(true);
 		//create table to place button into
@@ -101,8 +87,8 @@ public class HUD {
 		}
 
 		//create textures for jump button
-		jumpUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
-		jumpDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
+		TextureRegionDrawable jumpUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
+		TextureRegionDrawable jumpDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
         jumpButton = new TextButton("Jump", new TextButtonStyle(jumpUp, jumpDown, jumpUp, font));
         jumpButton.setFillParent(true);
 		//create table to add jump button to
@@ -112,8 +98,8 @@ public class HUD {
         
 
         //create textures and setup attack button
-		attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
-        attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));
+        TextureRegionDrawable attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
+        TextureRegionDrawable attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));
 		attackButton = new TextButton("Attack", new TextButtonStyle(attackUp, attackDown, attackUp, font));
         attackButton.setFillParent(true);
 		//create table to add the attack button to
@@ -122,16 +108,16 @@ public class HUD {
 		attackTable.add(attackButton);
 		
         //Create a touchpad skin	
-      	touchpadSkin = new Skin();
+		Skin touchpadSkin = new Skin();
       	//Set background image
       	touchpadSkin.add("touchBackground", new Texture("buttons/touchBackground.png"));
       	//Set knob image
       	touchpadSkin.add("touchKnob", new Texture("buttons/touchKnob.png"));
       	//Create TouchPad Style
-      	touchpadStyle = new TouchpadStyle();
+      	TouchpadStyle touchpadStyle = new TouchpadStyle();
       	//Create Drawable's from TouchPad skin
-      	touchBackground = touchpadSkin.getDrawable("touchBackground");
-      	touchKnob = touchpadSkin.getDrawable("touchKnob");
+      	Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
+      	Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
       	touchKnob.setMinWidth(40);
       	touchKnob.setMinHeight(40);
       	//Apply the Drawables to the TouchPad Style
@@ -154,9 +140,6 @@ public class HUD {
 			drawHeartsAndroid(sb);
 		} else {
 			sb.begin();
-			/*stage.addActor(attackTable);
-			stage.addActor(jumpTable);
-			stage.addActor(touchpad);*/
 			drawHearts(sb);
 		}
 
