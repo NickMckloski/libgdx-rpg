@@ -54,22 +54,24 @@ public class StartMenu extends GameState {
 	    //table.setWidth(stage.getWidth());
 	    table.align(Align.center);
 	    
-	    //font
+	    //generate our fonts
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("skins/custom/fonts/Arimo/Arimo-Regular.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 32;
+        parameter.shadowColor = Color.BLACK;
+        parameter.shadowOffsetY = 1;
+        BitmapFont titleFont = generator.generateFont(parameter);
         parameter.size = 22;
-        BitmapFont font22 = generator.generateFont(parameter);
-        parameter.size = 12;
-        BitmapFont font12 = generator.generateFont(parameter);
+        BitmapFont buttonFont = generator.generateFont(parameter);
         generator.dispose();
         
-	    labelStyle = new LabelStyle(font22, Color.WHITE);
+	    labelStyle = new LabelStyle(titleFont, Color.WHITE);
 		title = new Label("RPG Game", labelStyle);
 		
 		TextureAtlas blueUi = MainGame.assets.get(Assets.blueUi, TextureAtlas.class);
 		TextureRegionDrawable playUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
 		TextureRegionDrawable playDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
-		TextButton playButton = new TextButton("Play", new TextButtonStyle(playUp, playDown, playUp, font12));
+		TextButton playButton = new TextButton("Play", new TextButtonStyle(playUp, playDown, playUp, buttonFont));
         
         playButton.addListener(new ClickListener(){
         	@Override
