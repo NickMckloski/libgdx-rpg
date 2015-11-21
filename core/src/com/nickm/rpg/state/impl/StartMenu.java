@@ -47,7 +47,7 @@ public class StartMenu extends GameState {
 		//set inputprocessor to the multiplexer
 		Gdx.input.setInputProcessor(Input.inputs);
 		
-		bg = new Sprite(new Texture(Gdx.files.internal("images/grassbg1.gif")));
+		bg = MainGame.assets.get(AssetsManager.skyBackground, Sprite.class);
 		bg.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 	    table = new Table();

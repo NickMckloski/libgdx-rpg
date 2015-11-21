@@ -2,6 +2,7 @@ package com.nickm.rpg.manager;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 
@@ -14,6 +15,9 @@ public class AssetsManager {
 	public static String redUi = "skins/colorskins/ui-red.atlas";
 	public static String heartFull = "images/heartfull.png";
 	public static String heartEmpty = "images/heartempty.png";
+	
+	//images
+	public static String skyBackground = "images/grassbg1.gif";
 	
 	//entity assets
 	public static String playerSheet = "images/playersheet.png";//playersheet1 currently not in use
@@ -35,6 +39,9 @@ public class AssetsManager {
 		manager.load(redUi, TextureAtlas.class);
 		manager.load(heartFull, Texture.class);
 		manager.load(heartEmpty, Texture.class);
+		
+		//images
+		manager.load(skyBackground, Sprite.class);
 		
 		//entity assets
 		manager.load(playerSheet, Texture.class);
