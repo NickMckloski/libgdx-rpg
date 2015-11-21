@@ -13,7 +13,7 @@ public class Coins extends Entity {
 		super(body);
 		Texture tex = MainGame.assets.get(AssetsManager.coin, Texture.class);
 		TextureRegion[] sprites = TextureRegion.split(tex, 16, 16)[0];
-		setAnimation(sprites, 1/8f);
+		setAnimation(sprites, 1 / 8f);
 	}
-	
+
 }

@@ -15,71 +15,71 @@ import com.nickm.rpg.manager.GameStateManager;
 import com.nickm.rpg.manager.SaveManager;
 
 public class MainGame extends ApplicationAdapter {
-	
+
 	public static final String TITLE = "Platformer";
 	public static int V_WIDTH;
 	public static int V_HEIGHT;
 	public static int WINDOW_WIDTH;
 	public static int WINDOW_HEIGHT;
-	
-	public static final float STEP = 1/ 60f;
-	
+
+	public static final float STEP = 1 / 60f;
+
 	private SpriteBatch sb;
 	private Stage stage;
 	private BoundedCamera cam;
 	private OrthographicCamera hudCam;
-	
+
 	private static GameStateManager gameStateManager;
 	public static AssetsManager assets;
 	public SaveManager saveManager;
-	
+
 	public static boolean fullscreen;
 	public static String resolution;
-	
+
 	public void create() {
-		//Gdx.input.setInputProcessor(new InputManager());
+		// Gdx.input.setInputProcessor(new InputManager());
 		getDeviceResolution();
-		if(isMobileRuntime()) {
+		if (isMobileRuntime()) {
 			V_WIDTH = 320;
 			V_HEIGHT = 240;
 		} else {
 			V_WIDTH = 640;
 			V_HEIGHT = 480;
 		}
-		
-		//initiate new spritebatch
+
+		// initiate new spritebatch
 		sb = new SpriteBatch();
-		
-		saveManager= new SaveManager();
-		if(!saveManager.isEmpty())
+
+		saveManager = new SaveManager();
+		if (!saveManager.isEmpty())
 			loadSave();
-		
-		//create input multiplexer
+
+		// create input multiplexer
 		Input.inputs = new InputMultiplexer();
-		//create player cam
+		// create player cam
 		cam = new BoundedCamera();
 		cam.setToOrtho(false, V_WIDTH, V_HEIGHT);
-		//create stage
+		// create stage
 		stage = new Stage();
-		//stage.setDebugAll(true);
-		//create hud cam
+		// stage.setDebugAll(true);
+		// create hud cam
 		hudCam = new OrthographicCamera();
-		//set hudcam and stage views
-		if(isMobileRuntime()) {
-			hudCam.setToOrtho(false, V_WIDTH*2, V_HEIGHT*2);
-			stage.setViewport(new StretchViewport(V_WIDTH*2, V_HEIGHT*2));
+		// set hudcam and stage views
+		if (isMobileRuntime()) {
+			hudCam.setToOrtho(false, V_WIDTH * 2, V_HEIGHT * 2);
+			stage.setViewport(new StretchViewport(V_WIDTH * 2, V_HEIGHT * 2));
 		} else {
 			hudCam.setToOrtho(false, WINDOW_WIDTH, WINDOW_HEIGHT);
 			stage.setViewport(new StretchViewport(WINDOW_WIDTH, WINDOW_HEIGHT));
 		}
-		
-		//apply saved settings
+
+		// apply saved settings
 		applySave();
-		
+
 		setGameStateManager(new GameStateManager(this));
 		getGameStateManager().pushState(GameStateManager.LOADING);
 
-		//load assets
+		// load assets
 		MainGame.assets = new AssetsManager();
 	}
 
@@ -89,47 +89,66 @@ public class MainGame extends ApplicationAdapter {
 	}
 
 	public void render() {
-		Gdx.graphics.setTitle("FPS: "+Gdx.graphics.getFramesPerSecond());
-	    
+		Gdx.graphics.setTitle("FPS: " + Gdx.graphics.getFramesPerSecond());
+
 		getGameStateManager().update(Gdx.graphics.getDeltaTime());
 		getGameStateManager().render();
 		Input.update();
 	}
-	
+
 	private void applySave() {
-		if(resolution != null) {
-			Gdx.graphics.setDisplayMode(Integer.parseInt(resolution.substring(0,4)), Integer.parseInt(resolution.substring(5)), MainGame.fullscreen);
+		if (resolution != null) {
+			Gdx.graphics.setDisplayMode(Integer.parseInt(resolution.substring(0, 4)), Integer.parseInt(resolution.substring(5)), MainGame.fullscreen);
 		}
 	}
-	
+
 	private void loadSave() {
 		resolution = SaveManager.loadDataValue("resolution", String.class);
 		fullscreen = SaveManager.loadDataValue("fullscreen", Boolean.class) ? true : false;
-			
+
 	}
-	
+
 	public void dispose() {
-		SaveManager.saveDataValue("resolution", Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight());
+		SaveManager.saveDataValue("resolution", Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
 		SaveManager.saveDataValue("fullscreen", Gdx.graphics.isFullscreen() ? true : false);
 	}
-	
+
 	public static boolean isMobileRuntime() {
 		return Gdx.app.getType() == ApplicationType.Android || Gdx.app.getType() == ApplicationType.iOS;
 	}
-	
-	public static GameStateManager getGameStateManager() { return gameStateManager;	}
+
+	public static GameStateManager getGameStateManager() {
+		return gameStateManager;
+	}
+
 	private void setGameStateManager(GameStateManager gameStateManager) {
 		MainGame.gameStateManager = gameStateManager;
 	}
-	public SpriteBatch getSpriteBatch() { return sb; }
-	public Stage GetStage() { return stage; }
-	public BoundedCamera getCamera() { return cam; }
-	public OrthographicCamera getHUDCamera() { return hudCam; }
-	
+
+	public SpriteBatch getSpriteBatch() {
+		return sb;
+	}
+
+	public Stage GetStage() {
+		return stage;
+	}
+
+	public BoundedCamera getCamera() {
+		return cam;
+	}
+
+	public OrthographicCamera getHUDCamera() {
+		return hudCam;
+	}
+
 	public void resize(int w, int h) {
 		stage.getViewport().update(w, h);
 	}
-	public void pause() {}
-	public void resume() {}
-	
+
+	public void pause() {
+	}
+
+	public void resume() {
+	}
+
 }

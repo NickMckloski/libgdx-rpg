@@ -28,50 +28,50 @@ public class HUD {
 
 	private Player player;
 
-    Label coins;
+	Label coins;
 	public int[][] health;
 	private Texture heartFull;
 	private Texture heartEmpty;
-    
-    public Button settingsButton;
-    private Table settingsTable;
 
-    public TextButton jumpButton;
-    public TextButton attackButton;
-    private Table jumpTable;
-    private Table attackTable;
-    
-    public Touchpad touchpad;
+	public Button settingsButton;
+	private Table settingsTable;
+
+	public TextButton jumpButton;
+	public TextButton attackButton;
+	private Table jumpTable;
+	private Table attackTable;
+
+	public Touchpad touchpad;
 
 	public Window settingsWindow;
-	
-    public HUD(Player player) {
-		
+
+	public HUD(Player player) {
+
 		this.player = player;
-		
-		//grab the ui textures
+
+		// grab the ui textures
 		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
 		TextureAtlas redUi = MainGame.assets.get(AssetsManager.redUi, TextureAtlas.class);
 
-	    //generate the font
-        BitmapFont font = FontManager.generateFont("Arimo", "Regular", 20, true);
-        
-		//load the heart/health sprites
+		// generate the font
+		BitmapFont font = FontManager.generateFont("Arimo", "Regular", 20, true);
+
+		// load the heart/health sprites
 		heartFull = MainGame.assets.get(AssetsManager.heartFull, Texture.class);
 		heartEmpty = MainGame.assets.get(AssetsManager.heartEmpty, Texture.class);
-		
-		//create textures for settings button
+
+		// create textures for settings button
 		TextureRegionDrawable settings = new TextureRegionDrawable(blueUi.findRegion("icon_tools"));
 		settingsButton = new Button(settings);
 		settingsButton.setFillParent(true);
-		//create table to place button into
+		// create table to place button into
 		settingsTable = new Table();
 		settingsTable.add(settingsButton);
 
-        //add coin counter label and set it's position 
+		// add coin counter label and set it's position
 		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
-		coins = new Label("Coins: "+Integer.toString(player.coins), labelStyle);
-		if(MainGame.isMobileRuntime()) {
+		coins = new Label("Coins: " + Integer.toString(player.coins), labelStyle);
+		if (MainGame.isMobileRuntime()) {
 			settingsTable.setBounds(640, 460, 32, 32);
 			coins.setBounds(20, 420, 100, 50);
 		} else {
@@ -79,52 +79,51 @@ public class HUD {
 			coins.setBounds(10, 665, 100, 50);
 		}
 
-		//create textures for jump button
+		// create textures for jump button
 		TextureRegionDrawable jumpUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
 		TextureRegionDrawable jumpDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
-        jumpButton = new TextButton("Jump", new TextButtonStyle(jumpUp, jumpDown, jumpUp, font));
-        jumpButton.setFillParent(true);
-		//create table to add jump button to
-        jumpTable = new Table();
-        jumpTable.setBounds(380, 10, 100, 64);
-        jumpTable.add(jumpButton);
-        
+		jumpButton = new TextButton("Jump", new TextButtonStyle(jumpUp, jumpDown, jumpUp, font));
+		jumpButton.setFillParent(true);
+		// create table to add jump button to
+		jumpTable = new Table();
+		jumpTable.setBounds(380, 10, 100, 64);
+		jumpTable.add(jumpButton);
 
-        //create textures and setup attack button
-        TextureRegionDrawable attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
-        TextureRegionDrawable attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));
+		// create textures and setup attack button
+		TextureRegionDrawable attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
+		TextureRegionDrawable attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));
 		attackButton = new TextButton("Attack", new TextButtonStyle(attackUp, attackDown, attackUp, font));
-        attackButton.setFillParent(true);
-		//create table to add the attack button to
-        attackTable = new Table();
+		attackButton.setFillParent(true);
+		// create table to add the attack button to
+		attackTable = new Table();
 		attackTable.setBounds(500, 10, 100, 64);
 		attackTable.add(attackButton);
-		
-        //Create a touchpad skin	
+
+		// Create a touchpad skin
 		Skin touchpadSkin = new Skin();
-      	//Set background image
-      	touchpadSkin.add("touchBackground", new Texture("buttons/touchBackground.png"));
-      	//Set knob image
-      	touchpadSkin.add("touchKnob", new Texture("buttons/touchKnob.png"));
-      	//Create TouchPad Style
-      	TouchpadStyle touchpadStyle = new TouchpadStyle();
-      	//Create Drawable's from TouchPad skin
-      	Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
-      	Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
-      	touchKnob.setMinWidth(40);
-      	touchKnob.setMinHeight(40);
-      	//Apply the Drawables to the TouchPad Style
-      	touchpadStyle.background = touchBackground;
-      	touchpadStyle.knob = touchKnob;
-      	//Create new TouchPad with the created style
-      	touchpad = new Touchpad(10, touchpadStyle);
-      	//setBounds(x,y,width,height)
-      	touchpad.setBounds(15, 15, 100, 100);
+		// Set background image
+		touchpadSkin.add("touchBackground", new Texture("buttons/touchBackground.png"));
+		// Set knob image
+		touchpadSkin.add("touchKnob", new Texture("buttons/touchKnob.png"));
+		// Create TouchPad Style
+		TouchpadStyle touchpadStyle = new TouchpadStyle();
+		// Create Drawable's from TouchPad skin
+		Drawable touchBackground = touchpadSkin.getDrawable("touchBackground");
+		Drawable touchKnob = touchpadSkin.getDrawable("touchKnob");
+		touchKnob.setMinWidth(40);
+		touchKnob.setMinHeight(40);
+		// Apply the Drawables to the TouchPad Style
+		touchpadStyle.background = touchBackground;
+		touchpadStyle.knob = touchKnob;
+		// Create new TouchPad with the created style
+		touchpad = new Touchpad(10, touchpadStyle);
+		// setBounds(x,y,width,height)
+		touchpad.setBounds(15, 15, 100, 100);
 	}
-	
+
 	public void render(SpriteBatch sb, Stage stage) {
-		if(MainGame.isMobileRuntime()) {
-			if(!stage.getActors().contains(settingsWindow, true)) {
+		if (MainGame.isMobileRuntime()) {
+			if (!stage.getActors().contains(settingsWindow, true)) {
 				stage.addActor(attackTable);
 				stage.addActor(jumpTable);
 				stage.addActor(touchpad);
@@ -137,42 +136,43 @@ public class HUD {
 		}
 
 		sb.end();
-		
-		//coins.remove();
-		coins.setText("Coins: "+Integer.toString(player.coins));
+
+		// coins.remove();
+		coins.setText("Coins: " + Integer.toString(player.coins));
 		stage.addActor(coins);
-		
-		if(!stage.getActors().contains(settingsWindow, true)) {
+
+		if (!stage.getActors().contains(settingsWindow, true)) {
 			stage.addActor(settingsTable);
 		}
 
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
+
 	public void setHealth(int status) {
-		for(int i = 0; i < health.length; i++) {
+		for (int i = 0; i < health.length; i++) {
 			health[i][0] = status;
 		}
 	}
-	
-	private void drawHeartsAndroid(SpriteBatch sb) {//android method
-		for(int i = 0; i < health.length; i++) {
-			if(health[i][0] == 1) {
-				sb.draw(heartFull, 560-(i*36), 416, 32, 32);
-			} else {
-				sb.draw(heartEmpty, 560-(i*36), 416, 32, 32);
-			}
-		}
-	}
-	private void drawHearts(SpriteBatch sb) {//desktop method
-		for(int i = 0; i < health.length; i++) {
-			if(health[i][0] == 1) {
-				sb.draw(heartFull, 1160-(i*48), 660, 40, 40);
-			} else {
-				sb.draw(heartEmpty, 1160-(i*48), 660, 40, 40);
-			}
-		}
-	}
-	
-}
 
+	private void drawHeartsAndroid(SpriteBatch sb) {// android method
+		for (int i = 0; i < health.length; i++) {
+			if (health[i][0] == 1) {
+				sb.draw(heartFull, 560 - (i * 36), 416, 32, 32);
+			} else {
+				sb.draw(heartEmpty, 560 - (i * 36), 416, 32, 32);
+			}
+		}
+	}
+
+	private void drawHearts(SpriteBatch sb) {// desktop method
+		for (int i = 0; i < health.length; i++) {
+			if (health[i][0] == 1) {
+				sb.draw(heartFull, 1160 - (i * 48), 660, 40, 40);
+			} else {
+				sb.draw(heartEmpty, 1160 - (i * 48), 660, 40, 40);
+			}
+		}
+	}
+
+}

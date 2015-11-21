@@ -13,12 +13,12 @@ public class Entity {
 	protected AnimationManager animationManager;
 	protected float width;
 	protected float height;
-	
+
 	public Entity(Body body) {
 		this.body = body;
 		animationManager = new AnimationManager();
 	}
-	
+
 	public void setAnimation(TextureRegion[] reg, float delay) {
 		animationManager.setFrames(reg, delay);
 		width = reg[0].getRegionWidth();
@@ -34,11 +34,21 @@ public class Entity {
 		sb.draw(animationManager.getFrame(), body.getPosition().x * EntityConstants.PPM - width / 2, body.getPosition().y * EntityConstants.PPM - height / 2.5f);
 		sb.end();
 	}
-	
-	public Body getBody() { return body; }
-	public Vector2 getPosition() { return body.getPosition(); }
-	public float getWidth() { return width; }
-	public float getHeight() { return height; }
-	
-	
+
+	public Body getBody() {
+		return body;
+	}
+
+	public Vector2 getPosition() {
+		return body.getPosition();
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
 }

@@ -12,7 +12,7 @@ public class Bats extends Entity {
 	public Bats(Body body) {
 		super(body);
 		Texture tex = MainGame.assets.get(AssetsManager.bat, Texture.class);
-		TextureRegion[] sprites = TextureRegion.split(tex, 32,32)[1];
-		setAnimation(sprites, 1/6f);
+		TextureRegion[] sprites = TextureRegion.split(tex, 32, 32)[1];
+		setAnimation(sprites, 1 / 6f);
 	}
 }
