@@ -4,11 +4,9 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.nickm.rpg.components.BoundedCamera;
 import com.nickm.rpg.input.Input;
@@ -49,9 +47,6 @@ public class MainGame extends ApplicationAdapter {
 			V_HEIGHT = 480;
 		}
 		
-		//load our assets through Assets class
-		assets = new AssetsManager();
-		
 		//initiate new spritebatch
 		sb = new SpriteBatch();
 		
@@ -82,7 +77,10 @@ public class MainGame extends ApplicationAdapter {
 		applySave();
 		
 		setGameStateManager(new GameStateManager(this));
-		getGameStateManager().pushState(GameStateManager.STARTMENU);
+		getGameStateManager().pushState(GameStateManager.LOADING);
+
+		//load assets
+		MainGame.assets = new AssetsManager();
 	}
 
 	public static void getDeviceResolution() {
@@ -91,9 +89,8 @@ public class MainGame extends ApplicationAdapter {
 	}
 
 	public void render() {
-		
 		Gdx.graphics.setTitle("FPS: "+Gdx.graphics.getFramesPerSecond());
-		
+	    
 		getGameStateManager().update(Gdx.graphics.getDeltaTime());
 		getGameStateManager().render();
 		Input.update();

@@ -1,6 +1,5 @@
 package com.nickm.rpg.state.impl;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -55,8 +54,8 @@ public class Play extends GameState {
 	
 	private OrthographicCamera b2dCam;
 	
-	private static ContactManager contactManager;
-	public static ContactManager getContactManager() { return contactManager; }
+	private ContactManager contactManager;
+	public ContactManager getContactManager() { return contactManager; }
 	
 	private TiledMap tileMap;
 	private int tileMapWidth;

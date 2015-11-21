@@ -2,7 +2,6 @@ package com.nickm.rpg.manager;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 
@@ -31,7 +30,7 @@ public class AssetsManager {
 	 */
 	public AssetsManager() {
 		//initiate asset manager
-		this.manager = new AssetManager();
+		manager = new AssetManager();
 		
 		/*load assets*/
 		//ui assets
@@ -41,7 +40,7 @@ public class AssetsManager {
 		manager.load(heartEmpty, Texture.class);
 		
 		//images
-		manager.load(skyBackground, Sprite.class);
+		manager.load(skyBackground, Texture.class);
 		
 		//entity assets
 		manager.load(playerSheet, Texture.class);
@@ -50,13 +49,8 @@ public class AssetsManager {
 		manager.load(crystal, Texture.class);
 		manager.load(coin, Texture.class);
 		
-		//finalize
-		//XXX: add loading game state and display a loading bar
-		while(!manager.update())
-			System.out.println("Loading assets " + manager.getProgress() * 100 +"%");
-		//manager.finishLoading();
 	}
-	
+
 	public <T> T get(String fileName, Class<T> type) {
 		return manager.get(fileName, type);
 	}
