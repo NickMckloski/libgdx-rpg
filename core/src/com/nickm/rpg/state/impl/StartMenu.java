@@ -23,74 +23,73 @@ import com.nickm.rpg.manager.GameStateManager;
 import com.nickm.rpg.state.GameState;
 
 public class StartMenu extends GameState {
-	
+
 	Texture bg;
-	
 	Table table;
 	Label title;
 	LabelStyle labelStyle;
-    
-	
+
 	public StartMenu(GameStateManager gsm) {
 		super(gsm);
-		//stage = new Stage();
-		
-		//add inputs to multiplexer
+		// stage = new Stage();
+
+		// add inputs to multiplexer
 		Input.inputs.addProcessor(stage);
-		//set inputprocessor to the multiplexer
+		// set inputprocessor to the multiplexer
 		Gdx.input.setInputProcessor(Input.inputs);
-		
+
 		bg = MainGame.assets.get(AssetsManager.skyBackground, Texture.class);
-		
-	    table = new Table();
-	    //table.setWidth(stage.getWidth());
-	    table.align(Align.center);
-	    
-	    //generate our fonts
-        BitmapFont titleFont = FontManager.generateFont("Arimo", "Regular", 32, true);
-        BitmapFont buttonFont = FontManager.generateFont("Arimo", "Regular", 22, true);
-        
-	    labelStyle = new LabelStyle(titleFont, Color.WHITE);
+
+		table = new Table();
+		// table.setWidth(stage.getWidth());
+		table.align(Align.center);
+
+		// generate our fonts
+		BitmapFont titleFont = FontManager.generateFont("Arimo", "Regular", 32, true);
+		BitmapFont buttonFont = FontManager.generateFont("Arimo", "Regular", 22, true);
+
+		labelStyle = new LabelStyle(titleFont, Color.WHITE);
 		title = new Label("RPG Game", labelStyle);
-		
+
 		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
 		TextureRegionDrawable playUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
 		TextureRegionDrawable playDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
 		TextButton playButton = new TextButton("Play", new TextButtonStyle(playUp, playDown, playUp, buttonFont));
-        
-        playButton.addListener(new ClickListener(){
-        	@Override
-        	public void clicked(InputEvent even, float x, float y) {
-        		MainGame.getGameStateManager().setState(GameStateManager.PLAY);
-        	}
-        });
-        
+
+		playButton.addListener(new ClickListener() {
+
+			@Override
+			public void clicked(InputEvent even, float x, float y) {
+				MainGame.getGameStateManager().setState(GameStateManager.PLAY);
+			}
+		});
+
 		table.add(title);
 		table.row();
 		table.add(playButton).padTop(100);
 		stage.addActor(table);
-		
+
 	}
 
 	@Override
 	public void handleInput() {
-		
+
 	}
 
 	@Override
 	public void update(float dt) {
-		
+
 	}
 
 	@Override
 	public void render() {
-	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	    
-	    sb.begin();
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		sb.begin();
 		sb.draw(bg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-	    sb.end();
-	    
-	    stage.act(Gdx.graphics.getDeltaTime());
+		sb.end();
+
+		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}
 
