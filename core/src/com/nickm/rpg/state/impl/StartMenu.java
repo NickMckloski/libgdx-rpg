@@ -1,37 +1,30 @@
 package com.nickm.rpg.state.impl;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.nickm.rpg.MainGame;
 import com.nickm.rpg.input.Input;
 import com.nickm.rpg.manager.AssetsManager;
+import com.nickm.rpg.manager.FontManager;
 import com.nickm.rpg.manager.GameStateManager;
 import com.nickm.rpg.state.GameState;
 
 public class StartMenu extends GameState {
 	
-	Sprite bg;
+	Texture bg;
 	
 	Table table;
 	Label title;
@@ -47,23 +40,15 @@ public class StartMenu extends GameState {
 		//set inputprocessor to the multiplexer
 		Gdx.input.setInputProcessor(Input.inputs);
 		
-		bg = MainGame.assets.get(AssetsManager.skyBackground, Sprite.class);
-		bg.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		bg = MainGame.assets.get(AssetsManager.skyBackground, Texture.class);
 		
 	    table = new Table();
 	    //table.setWidth(stage.getWidth());
 	    table.align(Align.center);
 	    
 	    //generate our fonts
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("skins/custom/fonts/Arimo/Arimo-Regular.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 32;
-        parameter.shadowColor = Color.BLACK;
-        parameter.shadowOffsetY = 1;
-        BitmapFont titleFont = generator.generateFont(parameter);
-        parameter.size = 22;
-        BitmapFont buttonFont = generator.generateFont(parameter);
-        generator.dispose();
+        BitmapFont titleFont = FontManager.generateFont("Arimo", "Regular", 32, true);
+        BitmapFont buttonFont = FontManager.generateFont("Arimo", "Regular", 22, true);
         
 	    labelStyle = new LabelStyle(titleFont, Color.WHITE);
 		title = new Label("RPG Game", labelStyle);
@@ -102,7 +87,7 @@ public class StartMenu extends GameState {
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	    
 	    sb.begin();
-	    bg.draw(sb);
+		sb.draw(bg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	    sb.end();
 	    
 	    stage.act(Gdx.graphics.getDeltaTime());

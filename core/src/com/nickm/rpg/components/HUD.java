@@ -1,10 +1,7 @@
 package com.nickm.rpg.components;
 
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,24 +12,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.nickm.rpg.MainGame;
 import com.nickm.rpg.entity.impl.Player;
-import com.nickm.rpg.input.Input;
 import com.nickm.rpg.manager.AssetsManager;
-import com.nickm.rpg.state.impl.Play;
+import com.nickm.rpg.manager.FontManager;
 
 public class HUD {
 
@@ -64,14 +54,8 @@ public class HUD {
 		TextureAtlas redUi = MainGame.assets.get(AssetsManager.redUi, TextureAtlas.class);
 
 	    //generate the font
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("skins/custom/fonts/Arimo/Arimo-Regular.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 20;
-        parameter.shadowColor = Color.BLACK;
-        parameter.shadowOffsetY = 1;
-        BitmapFont font = generator.generateFont(parameter);
-        generator.dispose();
-		
+        BitmapFont font = FontManager.generateFont("Arimo", "Regular", 20, true);
+        
 		//load the heart/health sprites
 		heartFull = MainGame.assets.get(AssetsManager.heartFull, Texture.class);
 		heartEmpty = MainGame.assets.get(AssetsManager.heartEmpty, Texture.class);
