@@ -77,7 +77,17 @@
   <object x="208" y="560"/>
   <object x="334" y="561"/>
  </objectgroup>
- <objectgroup name="spikes" width="40" height="20"/>
+ <objectgroup name="spikes" width="40" height="20">
+  <object x="162" y="394" width="29" height="20"/>
+  <object x="641" y="332" width="29" height="18"/>
+  <object x="801" y="479" width="27" height="21"/>
+  <object x="832" y="480" width="30" height="22"/>
+  <object x="863" y="480" width="35" height="22"/>
+  <object x="898" y="480" width="29" height="23"/>
+  <object x="929" y="480" width="30" height="22"/>
+  <object x="962" y="478" width="28" height="27"/>
+  <object x="856" y="-51"/>
+ </objectgroup>
  <objectgroup name="hearts" width="40" height="20">
   <object x="148" y="559"/>
   <object x="466" y="559"/>
@@ -87,6 +97,11 @@
  <layer name="Tile Layer 11" width="40" height="20">
   <data encoding="base64" compression="zlib">
    eJxjYMAPNjDh55OilxpmooMDTPj5pOilhpnUNIse7rvAhJ+PD9DDfZQAXPZS4mdqgoEKF2IBIfdRkm+pAQi5b6DDd9R9lAFC+XKg8i0M8AExDx7MP3BOGwVUAKPxOwpGAW0BAD9lGqc=
+  </data>
+ </layer>
+ <layer name="spikes" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAoGHhxhGmgXDDwYDYNRQAq4woQdj4JRMNgBAPibBpE=
   </data>
  </layer>
 </map>

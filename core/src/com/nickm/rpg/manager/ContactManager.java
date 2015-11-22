@@ -59,7 +59,12 @@ public class ContactManager implements ContactListener {
 		}
 		if (fb.getUserData() != null && fb.getUserData().equals("heart")) {
 			bodiesToRemove.add(fb.getBody());
-
+		}
+		if (fa.getUserData() != null && fa.getUserData().equals("spike")) {
+			hitByMob = true;
+		}
+		if (fb.getUserData() != null && fb.getUserData().equals("spike")) {
+			hitByMob = true;
 		}
 		// player contacting mob
 		if (fb.getUserData() != null && fa.getUserData().equals("player") && fb.getUserData().equals("bat")) {
@@ -130,6 +135,12 @@ public class ContactManager implements ContactListener {
 				numMobSwordContacts--;
 			if (fa.getUserData().equals("player"))
 				hitByMob = false;
+		}
+		if (fa.getUserData() != null && fa.getUserData().equals("bat")) {
+			hitByMob = false;
+		}
+		if (fa.getUserData() != null && fb.getUserData().equals("bat")) {
+			hitByMob = false;
 		}
 	}
 

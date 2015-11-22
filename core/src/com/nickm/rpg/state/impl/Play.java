@@ -1,10 +1,13 @@
 package com.nickm.rpg.state.impl;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -68,6 +71,7 @@ public class Play extends GameState {
 
 	private Player player;
 	private Array<Coins> coins;
+	private Array<Object> spikes;
 	private Array<Hearts> hearts;
 	private Array<Bats> bats;
 
@@ -370,39 +374,20 @@ public class Play extends GameState {
 					player.startAnimation(contactManager.onGround() && !player.isBusy() ? 2 : 4);
 				} else {
 					if (contactManager.onGround() && !player.isBusy() && player.getBody().getLinearVelocity().isZero()) {
-						player.startAnimation(player.getFace() == 0 ? 0 : 1); // idle
-																				// when
-																				// on
-																				// the
-																				// ground,
-																				// not
-																				// attacking,
-																				// and
-																				// not
-																				// moving
+						// idle when on the ground, not attacking, and not moving
+						player.startAnimation(player.getFace() == 0 ? 0 : 1);
 					}
 				}
 				vel.x = hud.touchpad.getKnobPercentX() * 1.55f;
 				player.getBody().setLinearVelocity(vel);
 			} else {
 				if (contactManager.onGround() && !player.isBusy() && player.getBody().getLinearVelocity().isZero()) {
-					player.startAnimation(player.getFace() == 0 ? 0 : 1); // idle
-																			// when
-																			// on
-																			// the
-																			// ground,
-																			// not
-																			// attacking,
-																			// and
-																			// not
-																			// moving
+					// idle when on the ground, not attacking, and not moving
+					player.startAnimation(player.getFace() == 0 ? 0 : 1);
 				}
 			}
-			if (contactManager.isMobFootHit() && player.attacking) { // handle
-																		// air
-																		// attacks
-																		// for
-																		// android
+			// handle air attacks for android
+			if (contactManager.isMobFootHit() && player.attacking) { 
 				if (contactManager.hitBy.getUserData() == "foot") {
 					deadMobs.add(contactManager.swordHit.getBody());
 				}
@@ -469,16 +454,8 @@ public class Play extends GameState {
 				player.startAnimation(contactManager.onGround() && !player.attacking ? 2 : 4);
 			} else {
 				if (contactManager.onGround() && !player.isBusy() && player.getBody().getLinearVelocity().isZero()) {
-					player.startAnimation(player.getFace() == 0 ? 0 : 1); // idle
-																			// when
-																			// on
-																			// the
-																			// ground,
-																			// not
-																			// attacking,
-																			// and
-																			// not
-																			// moving
+					// idle when on the ground, not attacking, and not moving
+					player.startAnimation(player.getFace() == 0 ? 0 : 1);
 				}
 			}
 			if (Input.isPressed(Input.W) && !player.stuck) { // jumping
@@ -522,24 +499,21 @@ public class Play extends GameState {
 		tmr.setView(cam);
 		tmr.render();
 		// draw objects
+		sb.setProjectionMatrix(cam.combined);
 		if (coins != null)
 			for (int i = 0; i < coins.size; i++) {
-				sb.setProjectionMatrix(cam.combined);
 				coins.get(i).render(sb);
 			}
 		if (hearts != null)
 			for (int i = 0; i < hearts.size; i++) {
-				sb.setProjectionMatrix(cam.combined);
 				hearts.get(i).render(sb);
 			}
 		// draw mobs
 		if (bats != null)
 			for (int i = 0; i < bats.size; i++) {
-				sb.setProjectionMatrix(cam.combined);
 				bats.get(i).render(sb);
 			}
 		// draw player
-		sb.setProjectionMatrix(cam.combined);
 		player.render(sb);
 		// draw hud
 		sb.setProjectionMatrix(hudCam.combined);
@@ -659,6 +633,7 @@ public class Play extends GameState {
 		BodyDef bdef = new BodyDef();
 		FixtureDef fdef = new FixtureDef();
 
+		//load coins
 		MapLayer coinsLayer = tileMap.getLayers().get("coins");
 		if (coinsLayer == null)
 			return;
@@ -685,6 +660,7 @@ public class Play extends GameState {
 			cshape.dispose();
 		}
 
+		//load heart crystals
 		hearts = new Array<Hearts>();
 		MapLayer hearstLayer = tileMap.getLayers().get("hearts");
 		if (hearstLayer == null)
@@ -711,6 +687,30 @@ public class Play extends GameState {
 			body.setUserData(o);
 			cshape.dispose();
 		}
+		
+		//load spikes
+		MapLayer spikesLayer = tileMap.getLayers().get("spikes");
+		if (spikesLayer == null)
+			return;
+		for (MapObject mo : spikesLayer.getObjects()) {
+			bdef.type = BodyType.StaticBody;
+
+			float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
+			float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
+
+			bdef.position.set(x, y);
+
+			PolygonShape shape = new PolygonShape();
+			shape.setAsBox(12 / EntityConstants.PPM, 12 / EntityConstants.PPM);
+			fdef.shape = shape;
+			fdef.isSensor = true;
+			fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
+			fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
+
+			Body body = world.createBody(bdef);
+			body.createFixture(fdef).setUserData("spike");
+			shape.dispose();
+		}
 	}
 
 	public void createMobs() {
@@ -730,7 +730,7 @@ public class Play extends GameState {
 
 			bdef.position.set(x, y);
 
-			PolygonShape shape = new PolygonShape();
+			PolygonShape shape = new PolygonShape();			
 			shape.setAsBox(12 / EntityConstants.PPM, 12 / EntityConstants.PPM);
 			fdef.shape = shape;
 			fdef.isSensor = true;
