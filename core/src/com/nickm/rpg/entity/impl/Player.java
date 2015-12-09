@@ -11,7 +11,7 @@ public class Player extends Entity {
 
 	public int currentAnim = 0;
 	public int lastAnim = 0;
-	// XXX: redo how animations are store and retrieved
+	// XXX: redo how animations are stored and retrieved
 	// Animationlist
 	// 0 for idle, 1 back idle, 2 for walk, 3 back walk, 4 for jump, 5 back
 	// jump, 6 attack for, 7 attack back, 8 jump atk for, 9 jump atk back
@@ -25,6 +25,7 @@ public class Player extends Entity {
 
 	public boolean attacking = false;
 	public boolean stuck = false;
+	public boolean dead = false;
 	public int hearts = 5;
 	public int[][] health;;
 
@@ -39,7 +40,7 @@ public class Player extends Entity {
 	}
 
 	public boolean isBusy() {
-		if (attacking || stuck)
+		if (attacking || stuck || dead)
 			return true;
 		return false;
 	}

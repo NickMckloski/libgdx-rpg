@@ -28,23 +28,27 @@ public class HUD {
 
 	private Player player;
 
+	//top status info
 	Label coins;
 	public int[][] health;
 	private Texture heartFull;
 	private Texture heartEmpty;
 
+	//settings
+	public Window settingsWindow;
 	public Button settingsButton;
 	private Table settingsTable;
 
+	//controls
 	public TextButton jumpButton;
 	public TextButton attackButton;
 	private Table jumpTable;
 	private Table attackTable;
-
 	public Touchpad touchpad;
 
-	public Window settingsWindow;
-
+	//deathscreen
+	public Label deathText;
+	
 	public HUD(Player player) {
 
 		this.player = player;
@@ -56,10 +60,7 @@ public class HUD {
 		// generate the font
 		BitmapFont font = FontManager.generateFont("Arimo", "Regular", 20, true);
 
-		// load the heart/health sprites
-		heartFull = MainGame.assets.get(AssetsManager.heartFull, Texture.class);
-		heartEmpty = MainGame.assets.get(AssetsManager.heartEmpty, Texture.class);
-
+		/*setup button controls*/
 		// create textures for settings button
 		TextureRegionDrawable settings = new TextureRegionDrawable(blueUi.findRegion("icon_tools"));
 		settingsButton = new Button(settings);
@@ -67,6 +68,31 @@ public class HUD {
 		// create table to place button into
 		settingsTable = new Table();
 		settingsTable.add(settingsButton);
+		
+		// create textures for jump button
+		TextureRegionDrawable jumpUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
+		TextureRegionDrawable jumpDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
+		jumpButton = new TextButton("Jump", new TextButtonStyle(jumpUp, jumpDown, jumpUp, font));
+		jumpButton.setFillParent(true);
+		// create table to add jump button to
+		jumpTable = new Table();
+		jumpTable.setBounds(380, 10, 100, 64);
+		jumpTable.add(jumpButton);
+		
+		// create textures and setup attack button
+		TextureRegionDrawable attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
+		TextureRegionDrawable attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));
+		attackButton = new TextButton("Attack", new TextButtonStyle(attackUp, attackDown, attackUp, font));
+		attackButton.setFillParent(true);
+		// create table to add the attack button to
+		attackTable = new Table();
+		attackTable.setBounds(500, 10, 100, 64);
+		attackTable.add(attackButton);
+
+		
+		// load the heart/health sprites
+		heartFull = MainGame.assets.get(AssetsManager.heartFull, Texture.class);
+		heartEmpty = MainGame.assets.get(AssetsManager.heartEmpty, Texture.class);
 
 		// add coin counter label and set it's position
 		LabelStyle labelStyle = new LabelStyle(font, Color.WHITE);
@@ -78,27 +104,8 @@ public class HUD {
 			settingsTable.setBounds(1200, 655, 45, 45);
 			coins.setBounds(10, 665, 100, 50);
 		}
-
-		// create textures for jump button
-		TextureRegionDrawable jumpUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
-		TextureRegionDrawable jumpDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
-		jumpButton = new TextButton("Jump", new TextButtonStyle(jumpUp, jumpDown, jumpUp, font));
-		jumpButton.setFillParent(true);
-		// create table to add jump button to
-		jumpTable = new Table();
-		jumpTable.setBounds(380, 10, 100, 64);
-		jumpTable.add(jumpButton);
-
-		// create textures and setup attack button
-		TextureRegionDrawable attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
-		TextureRegionDrawable attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));
-		attackButton = new TextButton("Attack", new TextButtonStyle(attackUp, attackDown, attackUp, font));
-		attackButton.setFillParent(true);
-		// create table to add the attack button to
-		attackTable = new Table();
-		attackTable.setBounds(500, 10, 100, 64);
-		attackTable.add(attackButton);
-
+		
+		/*create touchpad control*/
 		// Create a touchpad skin
 		Skin touchpadSkin = new Skin();
 		// Set background image
@@ -119,11 +126,22 @@ public class HUD {
 		touchpad = new Touchpad(10, touchpadStyle);
 		// setBounds(x,y,width,height)
 		touchpad.setBounds(15, 15, 100, 100);
+		
+		
+		/*create deathscreen*/
+		// generate death font
+		BitmapFont deathFont = FontManager.generateFont("Arimo", "Regular", 40, true);
+		LabelStyle deathLabelStyle = new LabelStyle(deathFont, Color.WHITE);
+		deathText = new Label("You are dead!", deathLabelStyle);
+		deathText.setX(MainGame.WINDOW_WIDTH / 2);
+		deathText.setY(MainGame.WINDOW_HEIGHT / 2);
+		
 	}
 
 	public void render(SpriteBatch sb, Stage stage) {
 		if (MainGame.isMobileRuntime()) {
-			if (!stage.getActors().contains(settingsWindow, true)) {
+			//draw controls if settings window or death screen are not up
+			if (!stage.getActors().contains(settingsWindow, true) && !stage.getActors().contains(deathText, true)) {
 				stage.addActor(attackTable);
 				stage.addActor(jumpTable);
 				stage.addActor(touchpad);

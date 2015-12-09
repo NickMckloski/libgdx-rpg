@@ -1,13 +1,11 @@
 package com.nickm.rpg.state.impl;
 
-import java.util.Iterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
@@ -25,6 +23,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -51,7 +50,7 @@ import com.nickm.rpg.state.GameState;
 
 public class Play extends GameState {
 
-	private boolean debug = false;
+	private boolean debug = true;
 	private World world;
 	private Box2DDebugRenderer b2dr;
 
@@ -71,7 +70,6 @@ public class Play extends GameState {
 
 	private Player player;
 	private Array<Coins> coins;
-	private Array<Object> spikes;
 	private Array<Hearts> hearts;
 	private Array<Bats> bats;
 
@@ -88,7 +86,7 @@ public class Play extends GameState {
 	 */
 	public Play(GameStateManager gsm) {
 		super(gsm);
-
+		
 		deadMobs = new Array<Body>();
 
 		world = new World(new Vector2(0, -9.81f), true);
@@ -281,6 +279,11 @@ public class Play extends GameState {
 			}
 	}
 
+	/**
+	 * add an amount of health to players health pool
+	 * 
+	 * @param amount - how much to add
+	 */
 	public void gainHealth(int amount) {
 		for (int i = 0; i < amount; i++) {
 			for (int a = player.health.length - 1; a >= 0; a--) {
@@ -295,27 +298,60 @@ public class Play extends GameState {
 		}
 	}
 
+	/**
+	 * remove an amount of health from players health pool
+	 * 
+	 * @param amount - how much to remove
+	 */
 	public void loseHealth(int amount) {
 		for (int i = 0; i < amount; i++) {
 			for (int a = 0; a < player.health.length; a++) {
+				//find heart that is full, change it to empty
 				if (player.health[a][0] == 1) {
 					player.health[a][0] = 0;
 					hud.health[a][0] = 0;
-					return;
-				} else {
-					// dead
+					break;
 				}
+			}
+			//check if they have no health left
+			if(player.health[player.health.length-1][0] == 0) {
+				die();
+				return;
 			}
 		}
 	}
 
+	/**
+	 * handle the player's death
+	 */
+	public void die() {
+		
+		player.dead = true;
+		player.startAnimation(player.getFace() == 0 ? 10 : 11);
+		stage.addActor(hud.deathText);
+		
+		Timer.schedule(new Task() {
+
+			@Override
+			public void run() {
+				//reset gamestate
+				MainGame.getGameStateManager().setState(GameStateManager.PLAY);
+			}
+
+		}, 2f);
+	}
+
+	/**
+	 * method to handle input listeners on mobile platforms
+	 */
 	public void handleListeners() {
+		//attack button
 		hud.attackButton.addListener(new ClickListener() {
 
 			@Override
 			public void touchDragged(InputEvent event, float x, float y, int pointer) {
 				player.attacking = true;
-				if (contactManager.onGround() && !player.stuck) {
+				if (contactManager.onGround() && !player.stuck && !player.dead) {
 					player.startAnimation(player.getFace() == 0 ? 6 : 7);
 					if (contactManager.isMobHit()) {
 						if (contactManager.hitBy.getUserData().equals("rsword") && player.getFace() == 0) {
@@ -326,13 +362,11 @@ public class Play extends GameState {
 							System.out.println("sword hit");
 						}
 					}
-				} else {
-					if (!player.stuck) {
-						player.startAnimation(player.getFace() == 0 ? 8 : 9);
-						if (contactManager.isMobFootHit()) {
-							if (contactManager.hitBy.getUserData() == "foot") {
-								deadMobs.add(contactManager.swordHit.getBody());
-							}
+				} else if (!player.stuck && !player.dead) {
+					player.startAnimation(player.getFace() == 0 ? 8 : 9);
+					if (contactManager.isMobFootHit()) {
+						if (contactManager.hitBy.getUserData() == "foot") {
+							deadMobs.add(contactManager.swordHit.getBody());
 						}
 					}
 				}
@@ -346,6 +380,7 @@ public class Play extends GameState {
 				}, .7f);
 			}
 		});
+		//jump button
 		hud.jumpButton.addListener(new ClickListener() {
 
 			public void clicked(InputEvent event, float x, float y) {
@@ -365,7 +400,7 @@ public class Play extends GameState {
 		vel.x = 0;
 		player.getBody().setLinearVelocity(vel);
 
-		// android
+		// mobile
 		if (MainGame.isMobileRuntime()) {
 			if (hud.touchpad.isTouched() && !player.isBusy()) {
 				if (hud.touchpad.getKnobPercentX() < 0) { // left
@@ -420,7 +455,7 @@ public class Play extends GameState {
 				else
 					hud.settingsWindow.remove();
 			}
-			if (Input.isDown(Input.SPACE) && !player.stuck) {
+			if (Input.isDown(Input.SPACE) && !player.stuck && !player.dead) {
 				player.attacking = true;
 				if (contactManager.onGround()) {
 					player.startAnimation(player.getFace() == 0 ? 6 : 7);
@@ -444,11 +479,11 @@ public class Play extends GameState {
 			} else if (Input.isUp(Input.SPACE) && !player.stuck) {
 				player.attacking = false;
 				Input.setUpKey(Input.SPACE, false);
-			} else if (Input.isDown(Input.A) && !player.stuck) {
+			} else if (Input.isDown(Input.A) && !player.isBusy()) { //left
 				vel.x = -1.5f;
 				player.getBody().setLinearVelocity(vel);
 				player.startAnimation(contactManager.onGround() && !player.attacking ? 3 : 5);
-			} else if (Input.isDown(Input.D) && !player.stuck) {
+			} else if (Input.isDown(Input.D) && !player.isBusy()) { //right
 				vel.x = 1.5f;
 				player.getBody().setLinearVelocity(vel);
 				player.startAnimation(contactManager.onGround() && !player.attacking ? 2 : 4);
@@ -527,7 +562,7 @@ public class Play extends GameState {
 	}
 
 	public void dispose() {
-
+		stage.clear();
 	}
 
 	public void createPlayer() {
@@ -698,10 +733,10 @@ public class Play extends GameState {
 			float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
 			float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
 
-			bdef.position.set(x, y);
+			bdef.position.set(x+.15f, y+.1f);
 
 			PolygonShape shape = new PolygonShape();
-			shape.setAsBox(12 / EntityConstants.PPM, 12 / EntityConstants.PPM);
+			shape.setAsBox(15 / EntityConstants.PPM, 12 / EntityConstants.PPM);
 			fdef.shape = shape;
 			fdef.isSensor = true;
 			fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;

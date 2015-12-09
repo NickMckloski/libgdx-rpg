@@ -85,8 +85,7 @@
   <object x="863" y="480" width="35" height="22"/>
   <object x="898" y="480" width="29" height="23"/>
   <object x="929" y="480" width="30" height="22"/>
-  <object x="962" y="478" width="28" height="27"/>
-  <object x="856" y="-51"/>
+  <object x="961" y="479" width="30" height="22"/>
  </objectgroup>
  <objectgroup name="hearts" width="40" height="20">
   <object x="148" y="559"/>
