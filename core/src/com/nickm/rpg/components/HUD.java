@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad.TouchpadStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -28,11 +29,12 @@ public class HUD {
 
 	private Player player;
 
-	//top status info
+	//status info
 	Label coins;
 	public int[][] health;
 	private Texture heartFull;
 	private Texture heartEmpty;
+	public Label objectText;
 
 	//settings
 	public Window settingsWindow;
@@ -133,8 +135,12 @@ public class HUD {
 		BitmapFont deathFont = FontManager.generateFont("Arimo", "Regular", 40, true);
 		LabelStyle deathLabelStyle = new LabelStyle(deathFont, Color.WHITE);
 		deathText = new Label("You are dead!", deathLabelStyle);
-		deathText.setX(MainGame.WINDOW_WIDTH / 2);
-		deathText.setY(MainGame.WINDOW_HEIGHT / 2);
+		deathText.setX(MainGame.WINDOW_WIDTH / 2 - deathText.getWidth());
+		deathText.setY(MainGame.WINDOW_HEIGHT / 2 - deathText.getHeight());
+		
+		objectText = new Label("Press 'E' to enter door.", deathLabelStyle);
+		objectText.setX(MainGame.WINDOW_WIDTH / 2 - objectText.getWidth());
+		objectText.setY(MainGame.WINDOW_HEIGHT / 2 - objectText.getHeight());
 		
 	}
 

@@ -103,4 +103,11 @@
    eJxjYBgFo2AUjIJRMAoGHhxhGmgXDDwYDYNRQAq4woQdj4JRMNgBAPibBpE=
   </data>
  </layer>
+ <objectgroup name="doors" width="40" height="20">
+  <object x="545" y="495" width="62" height="81">
+   <properties>
+    <property name="level" value="level1room2"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

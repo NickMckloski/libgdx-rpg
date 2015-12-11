@@ -613,7 +613,7 @@ public class Play extends GameState {
 
 	public void createTiles() {
 		// load tile map
-		tileMap = new TmxMapLoader().load("maps/test2.tmx");
+		tileMap = new TmxMapLoader().load("maps/level1room1.tmx");
 		tmr = new OrthogonalTiledMapRenderer(tileMap);
 		tileMapWidth = (Integer) tileMap.getProperties().get("width");
 		tileMapHeight = (Integer) tileMap.getProperties().get("height");
@@ -668,86 +668,110 @@ public class Play extends GameState {
 		BodyDef bdef = new BodyDef();
 		FixtureDef fdef = new FixtureDef();
 
+		//load doors
+		MapLayer doorsLayer = tileMap.getLayers().get("doors");
+		if (doorsLayer != null) {
+			for (MapObject mo : doorsLayer.getObjects()) {
+				bdef.type = BodyType.StaticBody;
+	
+				float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
+				float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
+	
+				bdef.position.set(x+.31f, y+.4f);
+				
+				PolygonShape shape = new PolygonShape();
+				shape.setAsBox(25 / EntityConstants.PPM, 40 / EntityConstants.PPM);
+				fdef.shape = shape;
+				fdef.isSensor = true;
+				fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
+				fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
+	
+				Body body = world.createBody(bdef);
+				body.createFixture(fdef).setUserData("door-"+mo.getProperties().get("level"));
+				shape.dispose();
+			}
+		}
+		
 		//load coins
 		MapLayer coinsLayer = tileMap.getLayers().get("coins");
-		if (coinsLayer == null)
-			return;
-		for (MapObject mo : coinsLayer.getObjects()) {
-			bdef.type = BodyType.StaticBody;
-
-			float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
-			float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
-
-			bdef.position.set(x, y);
-
-			CircleShape cshape = new CircleShape();
-			cshape.setRadius(8 / EntityConstants.PPM);
-			fdef.shape = cshape;
-			fdef.isSensor = true;
-			fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
-			fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
-
-			Body body = world.createBody(bdef);
-			body.createFixture(fdef).setUserData("coin");
-			Coins o = new Coins(body);
-			coins.add(o);
-			body.setUserData(o);
-			cshape.dispose();
+		if (coinsLayer != null) {
+			for (MapObject mo : coinsLayer.getObjects()) {
+				bdef.type = BodyType.StaticBody;
+	
+				float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
+				float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
+	
+				bdef.position.set(x, y);
+	
+				CircleShape cshape = new CircleShape();
+				cshape.setRadius(8 / EntityConstants.PPM);
+				fdef.shape = cshape;
+				fdef.isSensor = true;
+				fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
+				fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
+	
+				Body body = world.createBody(bdef);
+				body.createFixture(fdef).setUserData("coin");
+				Coins o = new Coins(body);
+				coins.add(o);
+				body.setUserData(o);
+				cshape.dispose();
+			}
 		}
-
+		
 		//load heart crystals
 		hearts = new Array<Hearts>();
 		MapLayer hearstLayer = tileMap.getLayers().get("hearts");
-		if (hearstLayer == null)
-			return;
-		for (MapObject mo : hearstLayer.getObjects()) {
-			bdef.type = BodyType.StaticBody;
-
-			float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
-			float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
-
-			bdef.position.set(x, y);
-
-			CircleShape cshape = new CircleShape();
-			cshape.setRadius(8 / EntityConstants.PPM);
-			fdef.shape = cshape;
-			fdef.isSensor = true;
-			fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
-			fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
-
-			Body body = world.createBody(bdef);
-			body.createFixture(fdef).setUserData("heart");
-			Hearts o = new Hearts(body);
-			hearts.add(o);
-			body.setUserData(o);
-			cshape.dispose();
+		if (hearstLayer != null) {
+			for (MapObject mo : hearstLayer.getObjects()) {
+				bdef.type = BodyType.StaticBody;
+	
+				float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
+				float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
+	
+				bdef.position.set(x, y);
+	
+				CircleShape cshape = new CircleShape();
+				cshape.setRadius(8 / EntityConstants.PPM);
+				fdef.shape = cshape;
+				fdef.isSensor = true;
+				fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
+				fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
+	
+				Body body = world.createBody(bdef);
+				body.createFixture(fdef).setUserData("heart");
+				Hearts o = new Hearts(body);
+				hearts.add(o);
+				body.setUserData(o);
+				cshape.dispose();
+			}
 		}
 		
 		//load spikes
 		MapLayer spikesLayer = tileMap.getLayers().get("spikes");
-		if (spikesLayer == null)
-			return;
-		for (MapObject mo : spikesLayer.getObjects()) {
-			bdef.type = BodyType.StaticBody;
-
-			float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
-			float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
-
-			bdef.position.set(x+.15f, y+.1f);
-
-			PolygonShape shape = new PolygonShape();
-			shape.setAsBox(15 / EntityConstants.PPM, 12 / EntityConstants.PPM);
-			fdef.shape = shape;
-			fdef.isSensor = true;
-			fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
-			fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
-
-			Body body = world.createBody(bdef);
-			body.createFixture(fdef).setUserData("spike");
-			shape.dispose();
+		if (spikesLayer != null) {
+			for (MapObject mo : spikesLayer.getObjects()) {
+				bdef.type = BodyType.StaticBody;
+	
+				float x = (Float) mo.getProperties().get("x") / EntityConstants.PPM;
+				float y = (Float) mo.getProperties().get("y") / EntityConstants.PPM;
+	
+				bdef.position.set(x+.15f, y+.1f);
+	
+				PolygonShape shape = new PolygonShape();
+				shape.setAsBox(15 / EntityConstants.PPM, 12 / EntityConstants.PPM);
+				fdef.shape = shape;
+				fdef.isSensor = true;
+				fdef.filter.categoryBits = EntityConstants.BIT_OBJECT;
+				fdef.filter.maskBits = EntityConstants.BIT_PLAYER;
+	
+				Body body = world.createBody(bdef);
+				body.createFixture(fdef).setUserData("spike");
+				shape.dispose();
+			}
 		}
 	}
-
+	
 	public void createMobs() {
 		bats = new Array<Bats>();
 
