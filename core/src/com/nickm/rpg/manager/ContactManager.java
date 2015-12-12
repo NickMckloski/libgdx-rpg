@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.utils.Array;
 import com.nickm.rpg.entity.impl.Player;
+import com.nickm.rpg.state.impl.Play;
 
 public class ContactManager implements ContactListener {
 
@@ -17,12 +18,16 @@ public class ContactManager implements ContactListener {
 	private Array<Body> bodiesToRemove;
 	private Array<Body> deadMobs;
 	private Player player;
+	private Play state;
 	public Fixture swordHit;
 	public Fixture hitBy;
 	public boolean hitByMob = false;
+	public boolean touchingObject = false;
+	public String doorData = "";
 
-	public ContactManager(Player p) {
+	public ContactManager(Play s, Player p) {
 		super();
+		state = s;
 		player = p;
 		bodiesToRemove = new Array<Body>();
 		deadMobs = new Array<Body>();
@@ -97,6 +102,17 @@ public class ContactManager implements ContactListener {
 			swordHit = fb;
 			hitBy = fa;
 		}
+		// player contacting door
+		if (fb.getUserData() != null && fa.getUserData().equals("player") && fb.getUserData().toString().contains("door")) {
+			touchingObject = true;
+			doorData = fb.getUserData().toString().replace("door-", "");
+			state.displayAction(true, fb.getUserData().toString());
+		}
+		if (fb.getUserData() != null && fb.getUserData().equals("player") && fa.getUserData().toString().contains("door")) {
+			touchingObject = true;
+			doorData = fa.getUserData().toString().replace("door-", "");
+			state.displayAction(true, fa.getUserData().toString());
+		}
 	}
 
 	public void endContact(Contact c) {
@@ -141,6 +157,17 @@ public class ContactManager implements ContactListener {
 		}
 		if (fa.getUserData() != null && fb.getUserData().equals("bat")) {
 			hitByMob = false;
+		}
+
+		if (fa.getUserData() != null && fa.getUserData().toString().contains("door")) {
+			touchingObject = false;
+			doorData = "";
+			state.displayAction(false, fa.getUserData().toString());
+		}
+		if (fa.getUserData() != null && fb.getUserData().toString().contains("door")) {
+			touchingObject = false;
+			doorData = "";
+			state.displayAction(false, fb.getUserData().toString());
 		}
 	}
 

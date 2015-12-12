@@ -37,7 +37,7 @@ public class GameStateManager {
 
 	private GameState getState(int state) {
 		if (state == PLAY)
-			return new Play(this);
+			return new Play(this, MainGame.level);
 		if (state == STARTMENU)
 			return new StartMenu(this);
 		if (state == LOADING)

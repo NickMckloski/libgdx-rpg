@@ -33,8 +33,10 @@ public class MainGame extends ApplicationAdapter {
 	public static AssetsManager assets;
 	public SaveManager saveManager;
 
+	//saves
 	public static boolean fullscreen;
 	public static String resolution;
+	public static String level = "level1room1"; //level1room1 is default level
 
 	public void create() {
 		// Gdx.input.setInputProcessor(new InputManager());
@@ -105,10 +107,13 @@ public class MainGame extends ApplicationAdapter {
 	private void loadSave() {
 		resolution = SaveManager.loadDataValue("resolution", String.class);
 		fullscreen = SaveManager.loadDataValue("fullscreen", Boolean.class) ? true : false;
+		if(SaveManager.loadDataValue("level", String.class) != null)
+			level = SaveManager.loadDataValue("level", String.class);
 
 	}
 
 	public void dispose() {
+		SaveManager.saveDataValue("level", level);
 		SaveManager.saveDataValue("resolution", Gdx.graphics.getWidth() + "x" + Gdx.graphics.getHeight());
 		SaveManager.saveDataValue("fullscreen", Gdx.graphics.isFullscreen() ? true : false);
 	}

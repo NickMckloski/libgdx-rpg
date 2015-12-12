@@ -51,12 +51,12 @@
  </layer>
  <layer name="bg3" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2DwAj0g5kHC+gPrHJKAAZn6BqufyfXPULebUjBQbsdn71AOz8ECNIjAQwHgSwt8DKhlETLmp73TCAI5BtxhL0+h2aTG72ieIg8M5XDDlTcGCyYmDQ8kBgCuWw81
+   eJxjYBgFo2DwAj0g5kHC+gPrHJKAAZn6BqufyfXPULebUjBQbsdn71AOz4EAGkgYmxguPBQAvrTAx4BaFiFjfto7jSCQY8Ad9vIUmk1q/I7mKfLAUA43XHljsGBi0vBAYgAt6A+t
   </data>
  </layer>
  <layer name="Tile Layer 12" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BwAw0kPFLASPTzKBgFo2AUjIJRMApGBgAA1RgA8Q==
+   eJxjYBgFo2BwAw0kPFLASPTzKBgFgxWoMkDyotpAO2QUjIJRMAqGCQAAOf0BZA==
   </data>
  </layer>
  <objectgroup name="coins" width="40" height="20">
@@ -78,14 +78,15 @@
   <object x="334" y="561"/>
  </objectgroup>
  <objectgroup name="spikes" width="40" height="20">
-  <object x="162" y="394" width="29" height="20"/>
-  <object x="641" y="332" width="29" height="18"/>
-  <object x="801" y="479" width="27" height="21"/>
-  <object x="832" y="480" width="30" height="22"/>
-  <object x="863" y="480" width="35" height="22"/>
-  <object x="898" y="480" width="29" height="23"/>
-  <object x="929" y="480" width="30" height="22"/>
-  <object x="961" y="479" width="30" height="22"/>
+  <object x="800" y="480" width="32" height="32"/>
+  <object x="832" y="480" width="32" height="32"/>
+  <object x="864" y="480" width="32" height="32"/>
+  <object x="896" y="480" width="32" height="32"/>
+  <object x="928" y="480" width="32" height="32"/>
+  <object x="960" y="480" width="32" height="32"/>
+  <object x="640" y="352" width="32"/>
+  <object x="640" y="320" width="32" height="32"/>
+  <object x="160" y="384" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="hearts" width="40" height="20">
   <object x="148" y="559"/>
@@ -95,12 +96,12 @@
  </objectgroup>
  <layer name="Tile Layer 11" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPNjDh55OilxpmooMDTPj5pOilhpnUNIse7rvAhJ+PD9DDfZQAXPZS4mdqgoEKF2IBIfdRkm+pAQi5b6DDd9R9lAFC+XKg8i0M8AExDx7MP3BOGwVUAKPxOwpGAW0BAD9lGqc=
+   eJxjYMAPNjDh55OilxpmooMDTPj5pOilhpnUNIse7rvAhJ+PD9DDfZQAXPZS4mdqgoEKF2IBIfdRkm+pAQi5b6DDd9R9lAFC+ZKe+ZYHCcMAH5o4Ouann/NGAQ3AaPyOglFAWwAA/zUayw==
   </data>
  </layer>
  <layer name="spikes" width="40" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMAoGHhxhGmgXDDwYDYNRQAq4woQdj4JRMNgBAPibBpE=
+   eJxjYBgFo2AUjIJRMAoGHhxiGmgXDDwYDYNRQAq4zIQdj4JRMNgBANK3Boc=
   </data>
  </layer>
  <objectgroup name="doors" width="40" height="20">

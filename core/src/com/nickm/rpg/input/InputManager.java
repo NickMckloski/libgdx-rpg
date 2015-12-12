@@ -45,6 +45,9 @@ public class InputManager extends InputAdapter {
 		if (k == Keys.ESCAPE) {
 			Input.setKey(Input.ESCAPE, true);
 		}
+		if (k == Keys.E) {
+			Input.setKey(Input.E, true);
+		}
 		return true;
 	}
 
@@ -63,6 +66,9 @@ public class InputManager extends InputAdapter {
 		}
 		if (k == Keys.ESCAPE) {
 			Input.setKey(Input.ESCAPE, false);
+		}
+		if (k == Keys.E) {
+			Input.setKey(Input.E, false);
 		}
 		return true;
 	}

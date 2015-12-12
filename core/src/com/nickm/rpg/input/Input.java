@@ -24,12 +24,13 @@ public class Input {
 	public static boolean[] upkeys;
 	public static boolean[] pkeys;
 
-	public static final int NUM_KEYS = 5;
+	public static final int NUM_KEYS = 6;//total number of keys
 	public static final int A = 0;
 	public static final int D = 1;
 	public static final int W = 2;
 	public static final int SPACE = 3;
 	public static final int ESCAPE = 4;
+	public static final int E = 5;
 
 	static {
 		for (int i = 0; i < 5; i++) {

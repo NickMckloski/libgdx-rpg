@@ -34,7 +34,7 @@ public class HUD {
 	public int[][] health;
 	private Texture heartFull;
 	private Texture heartEmpty;
-	public Label objectText;
+	public Label actionText;
 
 	//settings
 	public Window settingsWindow;
@@ -135,12 +135,10 @@ public class HUD {
 		BitmapFont deathFont = FontManager.generateFont("Arimo", "Regular", 40, true);
 		LabelStyle deathLabelStyle = new LabelStyle(deathFont, Color.WHITE);
 		deathText = new Label("You are dead!", deathLabelStyle);
-		deathText.setX(MainGame.WINDOW_WIDTH / 2 - deathText.getWidth());
-		deathText.setY(MainGame.WINDOW_HEIGHT / 2 - deathText.getHeight());
+		deathText.setX(MainGame.WINDOW_WIDTH / 2 - (deathText.getWidth()/2));
+		deathText.setY(MainGame.WINDOW_HEIGHT / 2 - (deathText.getHeight()/2));
 		
-		objectText = new Label("Press 'E' to enter door.", deathLabelStyle);
-		objectText.setX(MainGame.WINDOW_WIDTH / 2 - objectText.getWidth());
-		objectText.setY(MainGame.WINDOW_HEIGHT / 2 - objectText.getHeight());
+		actionText = new Label("Press 'E' to enter.", deathLabelStyle);
 		
 	}
 

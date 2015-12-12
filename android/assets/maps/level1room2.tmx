@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="castle_tileset_part1_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part1_0.png" width="512" height="1344"/>
+ </tileset>
+ <tileset firstgid="673" name="castle_tileset_part2_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part2_0.png" width="512" height="672"/>
+ </tileset>
+ <tileset firstgid="1009" name="castle_tileset_part3_0" tilewidth="32" tileheight="32">
+  <image source="castle_tileset_part3_0.png" width="512" height="384"/>
+ </tileset>
+ <layer name="bg" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Hzr6vC5mIvSFg1VVXVhwfWF2Sf
+  </data>
+ </layer>
+ <layer name="Tile Layer 7" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztVUEOwCAI4/8P2Ht3XQwtRZjOZE0Wg1pWGkWzM3GBbzeYHqTZ052pieXIxCifWoe6jv7BYpTXhtGbZ1xWY1RPxSNPNwPyRj1v3jyKIz7TGPky7q9gRtsuKF6qd70bWR+VPF/oxU906umurdrnvX0rkX3HOu59N6/j7Co+zPKzuTIc9oZ4/Dd6qdoXmb8/zsMNSHVeVw==
+  </data>
+ </layer>
+ <layer name="Tile Layer 8" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdVUEOwCAI4/9nH7zjzAKlhanLmphMJ7SKgJnZsBsDDAXq/q4vVm/nTMift16xecaiC48r42d534oxEzv0P4s34qm+G8ZH1S9CdHbmXlRtq4D0ZntWg8nNL2pD8x1gc9Cb70CWf+x8FZT6NX+f1BflA+pjb/Y0VC+i+2HrTlUP+56qfaiq0ePO1iNbhUvV17FXofbdE3Vr5v8jLlTicL0=
+  </data>
+ </layer>
+ <layer name="Tile Layer 9" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztVVsOwCAI8/434Lb7NYQ+ROM+NpIlJsW2Q8Qx/pgjBMbwG4E8BMFuR6T17OsNfyG+nLuj4eSxfYoHYUrbwauaqHohHqbv1KDSr/YyHy6GNKr/RuvMtesP6VX+EG+3VxB3xcF6t9vbnTnGzknlrfrL6xV/q7lOf7Ec5fn0u8H6luWxuZP3IM5OuPMK1dx9UxwdxIc8u3OpwhAH4nfDOXc1IxCWc073wIl7cPIufSEej+50jA==
+  </data>
+ </layer>
+ <layer name="Tile Layer 10" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzNk1EOwzAIQ7n/IXrW/uyjSm3zSDZpSJEaarAJUPW263Ocdf9/ZRc4DrvLcarrianFr/QSjsTr4lQO51/jCYboUvGTPipzHI6zu1f433ElbTR20pP1u+NMuBJY2q+U0/HS/EnLild3orvD0ZOM7k/KmXBUx9S6fVSzSHv3LX2rrm7fuvkgnDvYtCvq7XZqcr3p9Cl/0nq6J5OdUT73piSO1kS0dbuh+kFmYfqWKg+p/5R/OpNPPYR7qs/V63zOJrM5yevy7MSTPv+DJU034lvzyw==
+  </data>
+ </layer>
+ <layer name="ground" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgFTGSopwceamAounkwgqESjvTKB8MVAwBZZwDb
+  </data>
+ </layer>
+ <layer name="brick trim1" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwUgFBiSq1wNiHhpjfUo8NECA1HAcBdjBUAlHWucBSrHGIMcAsvEKLg==
+  </data>
+ </layer>
+ <layer name="brick trim2" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAIA7DJwb9CLOzhIW3SBACgN8eB3xZf4QPB
+  </data>
+ </layer>
+ <layer name="extras" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSjADz4yD147FzIxMDCyQOheJojYUSB9DIiPQ/kw8ctMxGFkPdjMQraTENjIhKAnQNlXgfQ1IL4O5U/AYQ4T0A5mFuxy+MxCtpMUgMsd2MQFge4SAmJhFgibErOIBVNw6MUlrgR0lzKO8CPVrFFAPQAAc/ojMg==
+  </data>
+ </layer>
+ <layer name="extras2" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwSgYuuArMyo9XO0cBaNguAAAdncD4Q==
+  </data>
+ </layer>
+ <objectgroup name="spikes" width="40" height="20">
+  <object x="448" y="448" width="32" height="32"/>
+  <object x="480" y="448" width="32" height="32"/>
+  <object x="512" y="448" width="32" height="32"/>
+  <object x="544" y="448" width="32" height="32"/>
+  <object x="576" y="448" width="32" height="32"/>
+  <object x="608" y="448" width="32" height="32"/>
+  <object x="640" y="448" width="32" height="32"/>
+  <object x="672" y="448" width="32" height="32"/>
+  <object x="704" y="448" width="32" height="32"/>
+  <object x="736" y="448" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="doors" width="40" height="20">
+  <object x="576" y="480" width="64" height="96">
+   <properties>
+    <property name="level" value="level1room1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

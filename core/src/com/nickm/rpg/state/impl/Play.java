@@ -50,7 +50,7 @@ import com.nickm.rpg.state.GameState;
 
 public class Play extends GameState {
 
-	private boolean debug = true;
+	private boolean debug = false;
 	private World world;
 	private Box2DDebugRenderer b2dr;
 
@@ -84,7 +84,7 @@ public class Play extends GameState {
 	 * 
 	 * @param gsm
 	 */
-	public Play(GameStateManager gsm) {
+	public Play(GameStateManager gsm, String level) {
 		super(gsm);
 		
 		deadMobs = new Array<Body>();
@@ -93,8 +93,10 @@ public class Play extends GameState {
 		b2dr = new Box2DDebugRenderer();
 
 		createPlayer();
-		world.setContactListener(contactManager = new ContactManager(player));
-		createTiles();
+		world.setContactListener(contactManager = new ContactManager(this, player));
+		
+		//create map
+		createTiles(level);
 		createObjects();
 		createMobs();
 
@@ -342,6 +344,35 @@ public class Play extends GameState {
 	}
 
 	/**
+	 * Display the action text when touching an object
+	 * 
+	 * @param show - boolean to show or hide text
+	 * @param value - value of the object
+	 */
+	public void displayAction(boolean show, String value) {
+		if(show) {
+			hud.actionText.setText("Press 'E' to enter.");
+			hud.actionText.setX(MainGame.WINDOW_WIDTH / 2 - (hud.actionText.getWidth()/2));
+			hud.actionText.setY(MainGame.WINDOW_HEIGHT / 2 - (hud.actionText.getHeight()/2));
+			stage.addActor(hud.actionText);
+		} else {
+			hud.actionText.remove();
+		}
+	}
+	
+	/**
+	 * Enter a door
+	 * 
+	 * @param level - level to enter
+	 */
+	public void enterDoor(String level) {
+		//set level
+		MainGame.level = level;
+		//reset gamestate
+		MainGame.getGameStateManager().setState(GameStateManager.PLAY);
+	}
+	
+	/**
 	 * method to handle input listeners on mobile platforms
 	 */
 	public void handleListeners() {
@@ -493,12 +524,17 @@ public class Play extends GameState {
 					player.startAnimation(player.getFace() == 0 ? 0 : 1);
 				}
 			}
-			if (Input.isPressed(Input.W) && !player.stuck) { // jumping
+			if (Input.isPressed(Input.W)) { // jumping
 				if (contactManager.onGround() && !player.isBusy()) {
 					player.startAnimation(player.getFace() == 0 ? 4 : 5);
 					contactManager.setFootContacts(0);
 					vel.x = 0;
 					player.getBody().applyForceToCenter(0, 250, true);
+				}
+			}
+			if (Input.isPressed(Input.E)) { // object action
+				if (contactManager.onGround() && !player.isBusy() && contactManager.touchingObject) {
+					enterDoor(contactManager.doorData);
 				}
 			}
 			if (contactManager.hitByMob) { // handle being hit
@@ -611,9 +647,9 @@ public class Play extends GameState {
 		body.setUserData(player);
 	}
 
-	public void createTiles() {
+	public void createTiles(String level) {
 		// load tile map
-		tileMap = new TmxMapLoader().load("maps/level1room1.tmx");
+		tileMap = new TmxMapLoader().load("maps/"+level+".tmx");
 		tmr = new OrthogonalTiledMapRenderer(tileMap);
 		tileMapWidth = (Integer) tileMap.getProperties().get("width");
 		tileMapHeight = (Integer) tileMap.getProperties().get("height");
