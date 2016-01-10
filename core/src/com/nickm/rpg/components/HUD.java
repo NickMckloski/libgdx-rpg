@@ -42,9 +42,11 @@ public class HUD {
 	private Table settingsTable;
 
 	//controls
+	public TextButton actionButton;
+	public Table actionTable;
 	public TextButton jumpButton;
-	public TextButton attackButton;
 	private Table jumpTable;
+	public TextButton attackButton;
 	private Table attackTable;
 	public Touchpad touchpad;
 
@@ -56,13 +58,14 @@ public class HUD {
 		this.player = player;
 
 		// grab the ui textures
-		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
-		TextureAtlas redUi = MainGame.assets.get(AssetsManager.redUi, TextureAtlas.class);
+		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUI, TextureAtlas.class);
+		TextureAtlas redUi = MainGame.assets.get(AssetsManager.redUI, TextureAtlas.class);
+		TextureAtlas orangeUi = MainGame.assets.get(AssetsManager.orangeUI, TextureAtlas.class);
 
 		// generate the font
 		BitmapFont font = FontManager.generateFont("Arimo", "Regular", 20, true);
 
-		/*setup button controls*/
+		/*setup button controls for mobile*/
 		// create textures for settings button
 		TextureRegionDrawable settings = new TextureRegionDrawable(blueUi.findRegion("icon_tools"));
 		settingsButton = new Button(settings);
@@ -70,7 +73,19 @@ public class HUD {
 		// create table to place button into
 		settingsTable = new Table();
 		settingsTable.add(settingsButton);
-		
+
+		/*action button*/
+		// create textures for jump button
+		TextureRegionDrawable actionUp = new TextureRegionDrawable(orangeUi.findRegion("button_04"));
+		TextureRegionDrawable actionDown = new TextureRegionDrawable(orangeUi.findRegion("button_02"));
+		actionButton = new TextButton("Action", new TextButtonStyle(actionUp, actionDown, actionUp, font));
+		actionButton.setFillParent(true);
+		// create table to add jump button to
+		actionTable = new Table();
+		actionTable.setBounds(380, 100, 100, 64);
+		actionTable.add(actionButton);
+
+		/*jump button*/
 		// create textures for jump button
 		TextureRegionDrawable jumpUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
 		TextureRegionDrawable jumpDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
@@ -81,6 +96,7 @@ public class HUD {
 		jumpTable.setBounds(380, 10, 100, 64);
 		jumpTable.add(jumpButton);
 		
+		/*attack button*/
 		// create textures and setup attack button
 		TextureRegionDrawable attackUp = new TextureRegionDrawable(redUi.findRegion("button_04"));
 		TextureRegionDrawable attackDown = new TextureRegionDrawable(redUi.findRegion("button_02"));

@@ -51,7 +51,7 @@ public class StartMenu extends GameState {
 		labelStyle = new LabelStyle(titleFont, Color.WHITE);
 		title = new Label("RPG Game", labelStyle);
 
-		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUi, TextureAtlas.class);
+		TextureAtlas blueUi = MainGame.assets.get(AssetsManager.blueUI, TextureAtlas.class);
 		TextureRegionDrawable playUp = new TextureRegionDrawable(blueUi.findRegion("button_04"));
 		TextureRegionDrawable playDown = new TextureRegionDrawable(blueUi.findRegion("button_02"));
 		TextButton playButton = new TextButton("Play", new TextButtonStyle(playUp, playDown, playUp, buttonFont));

@@ -9,8 +9,9 @@ public class AssetsManager {
 	private AssetManager manager;
 
 	// ui assets
-	public static String blueUi = "skins/colorskins/ui-blue.atlas";
-	public static String redUi = "skins/colorskins/ui-red.atlas";
+	public static String blueUI = "skins/colorskins/ui-blue.atlas";
+	public static String redUI = "skins/colorskins/ui-red.atlas";
+	public static String orangeUI = "skins/colorskins/ui-orange.atlas";
 	public static String heartFull = "images/heartfull.png";
 	public static String heartEmpty = "images/heartempty.png";
 
@@ -35,8 +36,9 @@ public class AssetsManager {
 
 		/* load assets */
 		// ui assets
-		manager.load(blueUi, TextureAtlas.class);
-		manager.load(redUi, TextureAtlas.class);
+		manager.load(blueUI, TextureAtlas.class);
+		manager.load(redUI, TextureAtlas.class);
+		manager.load(orangeUI, TextureAtlas.class);
 		manager.load(heartFull, Texture.class);
 		manager.load(heartEmpty, Texture.class);
 

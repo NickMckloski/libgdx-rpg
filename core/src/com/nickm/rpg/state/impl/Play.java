@@ -351,12 +351,16 @@ public class Play extends GameState {
 	 */
 	public void displayAction(boolean show, String value) {
 		if(show) {
-			hud.actionText.setText("Press 'E' to enter.");
-			hud.actionText.setX(MainGame.WINDOW_WIDTH / 2 - (hud.actionText.getWidth()/2));
-			hud.actionText.setY(MainGame.WINDOW_HEIGHT / 2 - (hud.actionText.getHeight()/2));
-			stage.addActor(hud.actionText);
+			if(!MainGame.isMobileRuntime()) {
+				hud.actionText.setText("Press 'E' to enter.");
+				hud.actionText.setX(MainGame.WINDOW_WIDTH / 2 - (hud.actionText.getWidth()/2));
+				hud.actionText.setY(MainGame.WINDOW_HEIGHT / 2 - (hud.actionText.getHeight()/2));
+				stage.addActor(hud.actionText);
+			} else
+				stage.addActor(hud.actionTable);
 		} else {
 			hud.actionText.remove();
+			hud.actionTable.remove();
 		}
 	}
 	
@@ -419,6 +423,15 @@ public class Play extends GameState {
 					player.startAnimation(player.getFace() == 0 ? 4 : 5);
 					contactManager.setFootContacts(0);
 					player.getBody().applyForceToCenter(0, 250, true);
+				}
+			}
+		});
+		//action button
+		hud.actionButton.addListener(new ClickListener() {
+
+			public void clicked(InputEvent event, float x, float y) {
+				if (contactManager.onGround() && !player.isBusy() && contactManager.touchingObject) {
+					enterDoor(contactManager.doorData);
 				}
 			}
 		});
